@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.booledata.llspringparent.dao.SpringPointMapper">
+    <select id="getPointList" resultType="com.booledata.llspringparent.model.springPointInfo.response.SpringPointResult">
+        select * from springbaseinfo
+    </select>
+
+    <insert id="addPoint" parameterType="com.booledata.llspringparent.model.springPointInfo.SpringPointInfo">
+        insert into springbaseinfo(pointId,codeNumber,address,x,y,z,holeDepth,ph,waterTemperature,waterInflow,trepanning,waterOutlet,dissolvedSolids,co2,hydrothion,hsio,hbo2,br2,i2,fe,as,rn,hydrochemicalType)
+        values(#{pointId},#{codeNumber},#{address},#{x},#{y},#{z},#{holeDepth},#{ph},#{waterTemperature},#{waterInflow},#{trepanning},#{waterOutlet},#{dissolvedSolids},#{co2},#{hydrothion},#{hsio},#{hbo2},#{i2},#{as},#{rn},#{hydrochemicalType})
+
+    </insert>
+
+
+    <delete id="deletePoint" parameterType="int">
+        delete  from springbaseinfo where pointId =#{pointId}
+    </delete>
+
+    <update id="updatePoint" >
+        update * from springbaseinfo
+    </update>
+
+</mapper>

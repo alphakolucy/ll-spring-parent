@@ -1,0 +1,17 @@
+package com.booledata.llspringparent.common.model.response;
+
+/**
+ * Created by xlr on 19.09.26.
+ * 10000-- 通用错误代码
+ * 22000-- 底图错误
+ * 23000-- 温泉点错误
+ */
+public interface ResultCode {
+    //操作是否成功,true为成功，false操作失败
+    boolean success();
+    //操作代码
+    int code();
+    //提示信息
+    String message();
+
+}

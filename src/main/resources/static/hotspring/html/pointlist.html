@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+	</head>
+	<body>
+		<div class="layui-form" style="padding: 10px 0 0 10px;">
+			<div class="layui-inline">
+				<select name="selectfilter" lay-verify="" lay-filter="selectfilter">
+					<option value="codeNumber" selected>编号</option>
+					<option value="address">地址</option>
+				</select>
+			</div>
+			<div class="layui-inline"><input class="layui-input" style="width: 250px;display: inline-block;" id="searchvaladress"
+				 placeholder="请输入地址关键字" />
+				<button class="layui-btn" style="width: 100px;" id="searchaddress">查询</button>
+			</div>
+			<div class="layui-inline">
+				<button class="layui-btn" style="width: 100px;" id="import">导入</button>
+				<button class="layui-btn" style="width: 100px;" id="export">导出</button>
+				<button class="layui-btn" style="width: 100px;" id="exportall">导出所有</button>
+			</div>
+		</div>
+		<div>
+			<table class="layui-hide" id="list" lay-data="{id: 'pointlist'}" lay-filter="demo"></table>
+		</div>
+		<script type="text/javascript" src="../Api.js"></script>
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript">
+			var curpointjson = {};
+
+			layui.use(['table', 'form', 'jquery', 'layer','upload'], function() {
+				var table = layui.table;
+				var form = layui.form;
+				var $ = layui.jquery;
+				var layer = layui.layer;
+				var upload = layui.upload;
+				var searchfilter = "codeNumber";
+				var curtabledata=[];
+
+				//查询
+				$("#searchaddress").on("click", function() {
+					var searchval = $("#searchvaladress").val();
+					table.reload('pointlist', {
+						where: {
+							[searchfilter]: searchval,
+						},
+						page: {
+							curr: 1
+						}
+					});
+				});
+				//导出所有
+				$("#exportall").on("click", function() {
+					parent.exportdata();
+				});
+				//导出当前
+				$("#export").on("click", function() {
+
+					console.log(curtabledata);
+					if(curtabledata.length==0){
+						layer.msg('数据为空，导出失败！', {
+							icon: 5,
+							time: 1000
+						}, function() {
+						
+						});
+					}else{
+						tableToExcel(pointtabletitles, curtabledata);
+					}
+				});
+				
+				//导入
+				var uploadfiles = upload.render({
+					elem: "#import",
+					url: apiUrl + '/springPoint/importToSave',
+					data: {},
+					accept: 'file',
+					// multiple: true,
+					auto: true,
+					size: 51200,
+					choose: function(obj) {},
+					before: function(res) {
+						layer.load();
+					},
+					done: function(res) {
+						layer.closeAll('loading');
+						layer.msg('数据导入成功', {
+							icon: 1,
+							time: 1000
+						}, function() {
+                            table.reload('pointlist', {
+                                where: {
+                                    [searchfilter]: "",
+                                },
+                                page: {
+                                    curr: 1
+                                }
+                            });
+                        });
+						parent.getpointlist();
+					},
+					error: function() {
+						layer.msg('数据导入失败', {
+							icon: 5,
+							time: 1000
+						}, function() {
+
+						});
+						layer.closeAll('loading');
+					},
+				});
+				//选择查询字段
+				form.on('select(selectfilter)', function(data) {
+					// console.log(data.elem); //得到select原始DOM对象
+					searchfilter = data.value;
+					// console.log(data.value); //得到被选中的值
+					// console.log(data.othis); //得到美化后的DOM对象
+				});
+
+
+				table.render({
+					elem: '#list',
+					id: 'pointlist',
+					// limit: 3,
+					// limits: [3, 6, 9, 12],
+					url: apiUrl + "/springPoint/findAllPage",
+					request: {
+						pageName: 'page',
+						limitName: 'size'
+					},
+					parseData: function(res) { //res 即为原始返回的数据
+						return {
+							"code": res.code, //解析接口状态
+							"msg": res.message, //解析提示文本
+							"count": res.springPoints.totalElements, //解析数据长度
+							"data": res.springPoints.content //解析数据列表
+						};
+					},
+					response: {
+						statusName: 'code',
+						statusCode: 200,
+						// msgName: 'message',
+						// countName: 'springPoints.totalPages',
+						// dataName: 'springPoints.content'
+					},
+					cols: [
+						[{
+								field: 'id',
+								title: 'ID',
+								hide: true,
+							}, {
+								field: 'codeNumber',
+								title: '编号'
+							}, {
+								field: 'address',
+								title: '位置名称'
+							}, {
+								field: 'z',
+								title: '海拔'
+							}, {
+								field: 'holeDepth',
+								title: '孔深',
+							}, {
+								field: 'ph',
+								title: 'PH值',
+							}, {
+								field: 'waterTemperature',
+								title: '水温'
+							}, {
+								field: 'waterInflow',
+								title: '涌水量'
+							}, {
+								field: 'trepanning',
+								title: '开孔/出露层位'
+							}, {
+								field: 'waterOutlet',
+								title: '出水段'
+							},
+							{
+								field: 'pointCategory',
+								title: '温泉点类型',
+								templet: function(d) {
+									if (d.pointCategory == 30001) {
+										return "天然温泉";
+									} else if (d.pointCategory == 30002) {
+										return "地热井";
+									} else if (d.pointCategory == 30003) {
+										return "施工中热矿水转孔";
+									} else if (d.pointCategory == -30001) {
+										return "不达标温泉";
+									} else if (d.pointCategory == -30002) {
+										return "不达标地热";
+									} else if (d.pointCategory == -30004) {
+										return "无资料";
+									} else if (d.pointCategory == -30005) {
+										return "废弃";
+									} else {
+										return "未分类";
+									}
+								}
+							},
+							{
+								title: '操作',
+								width: 160,
+								toolbar: '#barDemo'
+							}
+						]
+					],
+					page: true,
+					done: function(res, curr, count){
+					    //如果是异步请求数据方式，res即为你接口返回的信息。
+						console.log("data:"+res.data);
+						curtabledata=res.data;
+						console.log('查询结果数：'+curtabledata);
+					  }
+				});
+				//监听工具条
+				table.on('tool(demo)', function(obj) {
+					var data = obj.data;
+					curpointjson = data;
+					if (obj.event === 'detail') {
+						layer.open({
+							type: 2,
+							title: "温泉点详情",
+							area: ['80%', '90%'],
+							shadeClose: true, //点击遮罩关闭
+							content: 'pointdetail.html'
+						});
+					} else if (obj.event === 'del') {
+						layer.confirm('真的删除行么', function(index) {
+							layer.close(index);
+							$.ajax({
+								type: "DELETE",
+								url: apiUrl + "/springPoint/deletePoint?id=" + curpointjson.id,
+								// data: {
+								// 	id: curpointjson.id
+								// },
+								dataType: "json",
+								success: function(data) {
+									layer.msg('删除成功', {
+										icon: 1,
+										time: 1000
+									}, function() {});
+									obj.del();
+								},
+								errorfunction(data) {
+									console.log(data);
+									layer.msg('删除失败', {
+										icon: 5,
+										time: 1000
+									}, function() {});
+								}
+							});
+						});
+					} else if (obj.event === 'edit') {
+						layer.open({
+							type: 2,
+							title: "编辑温泉点",
+							area: ['80%', '90%'],
+							shadeClose: true, //点击遮罩关闭
+							content: 'pointmodify.html',
+                            end:function(){
+                                table.reload('pointlist', {
+                                    where: {
+                                        [searchfilter]: "",
+                                    },
+                                    page: {
+                                        curr: 1
+                                    }
+                                });
+                            }
+						});
+					}
+				});
+			});
+		</script>
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+		  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+		  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		</script>
+	</body>
+</html>

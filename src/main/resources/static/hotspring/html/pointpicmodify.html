@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+		<style type="text/css">
+			.show {
+				width: 750px;
+				margin: 0 auto;
+				text-align: center;
+			}
+
+			.show .showimg {
+				position: relative;
+				width: 350px;
+				height: 350px;
+				border: 1px solid #707070;
+				display: inline-block;
+			}
+
+			.show .showimg .img {
+				width: 350px;
+				height: 350px;
+			}
+
+			.show .showimg .img img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.show .showimg .chooseimg {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				height: 50px;
+				width: 50px;
+				margin: -25px 0 0 -25px;
+			}
+
+			.show .showimg .chooseimg img {
+				width: 100%;
+				height: 100%;
+				cursor: pointer;
+			}
+
+			.show .show-pdding {
+				margin-left: 20px;
+			}
+
+			.listpic {
+				width: 830px;
+				margin: 0 auto;
+				padding-top: 5px;
+			}
+
+			.listpic .pic {
+				position: relative;
+				width: 160px;
+				height: 160px;
+				display: inline-block;
+				border: 1px solid #707070;
+				margin: 5px 2px;
+			}
+
+			.listpic .pic .picshow {
+				width: 150px;
+				height: 150px;
+				padding: 4px;
+			}
+
+			.listpic .pic .picshow img {
+				width: 100%;
+				height: 100%;
+				cursor: pointer;
+			}
+
+			.listpic .pic .picoprate {
+				position: absolute;
+				right: 10px;
+				top: 10px;
+			}
+
+			.listpic .pic .picoprate img {
+				width: 20px;
+				height: 20px;
+				cursor: pointer;
+				margin-left: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="layui-tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this">基本信息</li>
+				<li>位置图</li>
+				<li>地质图</li>
+				<li>柱状图/剖面图</li>
+				<li>水质分析</li>
+				<li>成因模式</li>
+				<li>附件</li>
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<!--基本信息-->
+					<form class="layui-form" action="" lay-filter="pointinfo">
+						<b>基本信息</b>
+						<div class="layui-row layui-hide">
+							<div class="layui-col-md6">
+								<div class="layui-form-item">
+									<label class="layui-form-label">id</label>
+									<div class="layui-input-block">
+										<input type="text" name="id" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-row">
+							<div class="layui-col-md6">
+								<div class="layui-form-item">
+									<label class="layui-form-label">编号</label>
+									<div class="layui-input-block">
+										<input type="text" name="codeNumber" required lay-verify="required" placeholder="请输入" autocomplete="off"
+										 class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md6">
+								<div class="layui-form-item">
+									<label class="layui-form-label">位置名称</label>
+									<div class="layui-input-block">
+										<input type="text" name="address" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+						<div class="layui-row">
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">x</label>
+									<div class="layui-input-block">
+										<input type="text" name="x" required lay-verify="required" value="1182.4152024552552" placeholder="请输入"
+										 autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">y</label>
+									<div class="layui-input-block">
+										<input type="text" name="y" required lay-verify="required" value="5560.519195287376" placeholder="请输入"
+										 autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">海拔</label>
+									<div class="layui-input-block">
+										<input type="text" name="z" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+						<div class="layui-row">
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">孔深</label>
+									<div class="layui-input-block">
+										<input type="text" name="holeDepth" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">PH</label>
+									<div class="layui-input-block">
+										<input type="text" name="ph" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">水温</label>
+									<div class="layui-input-block">
+										<input type="text" name="waterTemperature" required lay-verify="required" placeholder="请输入" autocomplete="off"
+										 class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-row">
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">涌水量</label>
+									<div class="layui-input-block">
+										<input type="text" name="waterInflow" required lay-verify="required" placeholder="请输入" autocomplete="off"
+										 class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">开孔/出露层位</label>
+									<div class="layui-input-block">
+										<input type="text" name="trepanning" required lay-verify="required" placeholder="请输入" autocomplete="off"
+										 class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">出水段</label>
+									<div class="layui-input-block">
+										<input type="text" name="waterOutlet" required lay-verify="required" placeholder="请输入" autocomplete="off"
+										 class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<b>理疗天然矿泉水水质指标</b>
+						<div class="layui-row">
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">溶解性总固体</label>
+									<div class="layui-input-block">
+										<input type="text" name="dissolvedSolids" required lay-verify="required" placeholder="请输入" autocomplete="off"
+										 class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">二氧化碳</label>
+									<div class="layui-input-block">
+										<input type="text" name="co2" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">总硫化氢</label>
+									<div class="layui-input-block">
+										<input type="text" name="hydrothion" required lay-verify="required" placeholder="请输入" autocomplete="off"
+										 class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-row">
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">偏硅酸</label>
+									<div class="layui-input-block">
+										<input type="text" name="hsio" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">偏硼酸</label>
+									<div class="layui-input-block">
+										<input type="text" name="hbo2" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">溴</label>
+									<div class="layui-input-block">
+										<input type="text" name="br2" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-row">
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">碘</label>
+									<div class="layui-input-block">
+										<input type="text" name="i2" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">总铁</label>
+									<div class="layui-input-block">
+										<input type="text" name="fe" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">砷</label>
+									<div class="layui-input-block">
+										<input type="text" name="asa" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-row">
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">氡</label>
+									<div class="layui-input-block">
+										<input type="text" name="rn" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+
+							<div class="layui-col-md4">
+								<div class="layui-form-item">
+									<label class="layui-form-label">水化学类型</label>
+									<div class="layui-input-block">
+										<input type="text" name="hydrochemicalType" required lay-verify="required" placeholder="请输入" autocomplete="off"
+										 class="layui-input">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="layui-tab-item">
+					<!--位置图-->
+					<div class="show">
+						<div class="showimg">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="seat1img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="seat1" /></div>
+						</div>
+						<div class="showimg show-pdding">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="seat2img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="seat2" /></div>
+						</div>
+					</div>
+					<div class="listpic" id="listpic10001">
+						<!-- <div class="pic">
+							<div class="picshow"><img src="../img/default.png" /></div>
+							<div class="picoprate"><img src="../img/download.png" title="下载" /><img src="../img/delete.png" title="删除" /></div>
+						</div> -->
+					</div>
+				</div>
+
+				<div class="layui-tab-item">
+					<!--地质图-->
+					<div class="show">
+						<div class="showimg">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="geology1img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="geology1" /></div>
+						</div>
+						<div class="showimg show-pdding">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="geology2img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="geology2" /></div>
+						</div>
+					</div>
+					<div class="listpic" id="listpic10002">
+						<!-- <div class="pic">
+							<div class="picshow"><img src="../img/default.png" /></div>
+							<div class="picoprate"><img src="../img/download.png" title="下载" /><img src="../img/delete.png" title="删除" /></div>
+						</div> -->
+					</div>
+				</div>
+
+				<div class="layui-tab-item">
+					<!--柱状图/剖面图-->
+					<div class="show">
+						<div class="showimg">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="columnar1img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="columnar1" /></div>
+						</div>
+						<div class="showimg show-pdding">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="columnar2img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="columnar2" /></div>
+						</div>
+					</div>
+					<div class="listpic" id="listpic10003">
+						<!-- 	<div class="pic">
+							<div class="picshow"><img src="../img/default.png" /></div>
+							<div class="picoprate"><img src="../img/download.png" title="下载" /><img src="../img/delete.png" title="删除" /></div>
+						</div> -->
+					</div>
+				</div>
+				<div class="layui-tab-item">
+					<!--水质分析-->
+					<div class="show">
+						<div class="showimg">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="waterquality1img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="waterquality1" /></div>
+						</div>
+						<div class="showimg show-pdding">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="waterquality2img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="waterquality2" /></div>
+						</div>
+					</div>
+					<div class="listpic" id="listpic10004">
+						<!-- <div class="pic">
+							<div class="picshow"><img src="../img/default.png" /></div>
+							<div class="picoprate"><img src="../img/download.png" title="下载" /><img src="../img/delete.png" title="删除" /></div>
+						</div> -->
+					</div>
+				</div>
+				<div class="layui-tab-item">
+					<!--成因模式-->
+					<div class="show">
+						<div class="showimg">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="model1img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="model1" /></div>
+						</div>
+						<div class="showimg show-pdding">
+							<div class="img"><img src="../img/default.png" layui-imgid=0 id="model2img"></div>
+							<div class="chooseimg"><img src="../img/addimg.png" id="model2" /></div>
+						</div>
+					</div>
+					<div class="listpic" id="listpic10005">
+						<!-- <div class="pic">
+							<div class="picshow"><img src="../img/default.png" /></div>
+							<div class="picoprate"><img src="../img/download.png" title="下载" /><img src="../img/delete.png" title="删除" /></div>
+						</div> -->
+					</div>
+				</div>
+				<div class="layui-tab-item">
+					<!--附件-->
+					<button type="button" class="layui-btn" id="uploadfile">
+						<i class="layui-icon">&#xe67c;</i>上传附件
+					</button>
+					<div class="layui-upload-list">
+						<table class="layui-table">
+							<thead>
+								<tr>
+									<th>附件名称</th>
+                                    <th>创建时间</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody id="filesList"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../Api.js"></script>
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript">
+			var curpointdata = parent.curpointjson;
+			layui.use(['upload', 'element', 'form', 'jquery'], function() {
+				var upload = layui.upload;
+				var element = layui.element;
+				var form = layui.form;
+				var $ = layui.jquery;
+				//获取数据接口
+				var inputs = $("form").find("input");
+				$.each(inputs, function(index, item) {
+					$(item).val(curpointdata[$(item).attr("name")]);
+					//遍历得到的每一个jquery对象
+				});
+				// form.val("pointinfo", curpointdata);
+				//获取历史图片
+				var picStates = ["10001", "10002", "10003", "10004", "10005"];
+				$.each(picStates, function(index, item) {
+					$.ajax({
+						type: "GET",
+						url: apiUrl + "/springPoint/findPicFileHistory",
+						dataType: "json",
+						data: {
+							"pointId": curpointdata.id,
+							"picState": item
+						},
+						success: function(data) {
+							if (data.code == 200) {
+								$.each(data.springPicFileList, function(index1, item1) {
+									var curhtml = $(["<div class=\"pic\">",
+										"<div class=\"picshow\"><img class=\"picimg\" src=" + item1.url + " /></div>",
+										"<div class=\"picoprate\"><img src=\"../img/download.png\" layui-url=\"" + item1.url +
+										"\" class=\"down\" title=\"下载\" />",
+										"<img src=\"../img/delete.png\" title=\"删除\" class=\"delete\" layui-id=\"" + item1.id +
+										"\"  /></div>",
+										"</div>"
+									].join(''));
+
+									curhtml.find(".picimg").on('click', function() {
+										var img = new Image();
+                                        var imasrc = $(this).attr("src");//$(this).src;
+										// img.src = "../img/default.png";
+										// var height = img.height + 50; //获取图片高度
+										// var width = img.width; //获取图片宽度
+										var imgHtml = "<div style='text-align:center'><img src='"+imasrc+"' /></div>";
+										//弹出层
+										var imglayer=layer.open({
+											type: 1,
+											shade: 0.8,
+											offset: 'auto',
+											area: ['300px', '300px'],
+											shadeClose: true, //点击外围关闭弹窗
+											scrollbar: true, //不现实滚动条
+											title: "图片预览"+item1.createTime, //不显示标题  
+											content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响  
+											cancel: function() {
+												//layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });  
+											}
+										});
+										layer.full(imglayer);
+									});
+									curhtml.find(".down").on('click', function() {
+										var a = document.createElement('a');
+										a.setAttribute('href', $(this).attr("layui-url"));
+										a.setAttribute('target', '_blank');
+										a.click();
+									});
+									curhtml.find(".delete").on('click', function() {
+										$.ajax({
+											type: "DELETE",
+											url: apiUrl + "/springPoint/deletePicFileHis?id=" + $(this).attr("layui-id"),
+											success: function(data) {
+												if (data.code == 200) {
+													layer.msg('删除成功', {
+														icon: 1,
+														time: 1000
+													}, function() {
+														curhtml.remove();
+													});
+												} else {
+													layer.msg('删除失败', {
+														icon: 5,
+														time: 1000
+													}, function() {});
+												}
+											},
+											error: function(data) {
+												console.log(data);
+												layer.msg('删除失败', {
+													icon: 5,
+													time: 1000
+												}, function() {});
+											}
+										});
+									});
+									$("#listpic" + item).append(curhtml);
+								})
+							} else {
+
+							}
+						},
+						error: function(data) {
+							console.log(data);
+							// layer.msg('删除失败', {
+							// 	icon: 5,
+							// 	time: 1000
+							// }, function() {});
+						}
+					});
+				})
+
+				var picState1 = 1;
+				var picState2 = 1;
+				var picState3 = 1;
+				var picState4 = 1;
+				var picState5 = 1;
+				var filesListView = $('#filesList');
+				//获取所有的图片
+				$.ajax({
+					type: "GET",
+					url: apiUrl + "/springPoint/findOnePic?id=" + curpointdata.id,
+					dataType: "json",
+					success: function(data) {
+						$.each(data, function(index, item) {
+							switch (item.picState) {
+								case 10001:
+									{
+										$("#seat" + picState1 + "img").attr("src", item.url);
+										$("#seat" + picState1 + "img").attr("layui-imgid", item.pid);
+										picState1 = picState1 + 1;
+										break;
+									}
+								case 10002:
+									{
+										$("#geology" + picState2 + "img").attr("src", item.url);
+										$("#geology" + picState2 + "img").attr("layui-imgid", item.id);
+										picState2 = picState2 + 1;
+										break;
+									}
+								case 10003:
+									{
+										$("#columnar" + picState3 + "img").attr("src", item.url);
+										$("#columnar" + picState3 + "img").attr("layui-imgid", item.id);
+										picState3 = picState3 + 1;
+										break;
+									}
+								case 10004:
+									{
+										$("#waterquality" + picState4 + "img").attr("src", item.url);
+										$("#waterquality" + picState4 + "img").attr("layui-imgid", item.id);
+										picState4 = picState4 + 1;
+										break;
+									}
+								case 10005:
+									{
+										$("#model" + picState5 + "img").attr("src", item.url);
+										$("#model" + picState5 + "img").attr("layui-imgid", item.id);
+										picState5 = picState5 + 1;
+										break;
+									}
+								case 10006:
+									{
+										var tr = $(['<tr id="0">', '<td>' + item.fileName + '</td>', '<td>' + item.createTime + '</td>','<td>',
+											'<button layui-url=' + item.url + ' class="layui-btn layui-btn-xs demo-down">下载</button>',
+											'<button layui-pid=' + item.pid +
+											' class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>', '</td>', '</tr>'
+										].join(''));
+										tr.find('.demo-delete').on('click', function() {
+											$.ajax({
+												type: "DELETE",
+												url: apiUrl + "/upload?id=" + $(this).attr("layui-pid"),
+												// data: {
+												// 	id: curpointjson.id
+												// },
+												// dataType: "json",
+												success: function(data) {
+													console.log(data);
+													layer.msg('删除成功', {
+														icon: 1,
+														time: 1000
+													}, function() {
+														tr.remove();
+														uploadfiles.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+													});
+												},
+												error: function(data) {
+													console.log(data);
+													layer.msg('删除失败', {
+														icon: 5,
+														time: 1000
+													}, function() {});
+												}
+											});
+										});
+										//下载
+										tr.find('.demo-down').on('click', function() {
+											var a = document.createElement('a');
+											a.setAttribute('href', $(this).attr("layui-url"));
+											a.setAttribute('target', '_blank');
+											a.click();
+										});
+										filesListView.append(tr);
+										break;
+									}
+								default:
+									break;
+							}
+						});
+					},
+					error: function(data) {
+						console.log(data);
+						// layer.msg('删除失败', {
+						// 	icon: 5,
+						// 	time: 1000
+						// }, function() {});
+					}
+				});
+				form.render();
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					var fromdata = data.field;
+					//添加温泉点
+					$.ajax({
+						type: "PUT",
+						url: apiUrl + "/springPoint/" + curpointdata.id,
+						data: fromdata,
+						dataType: "json",
+						success: function(data) {
+							layer.msg('修改成功', {
+								icon: 1,
+								time: 1000
+							}, function() {});
+						},
+						errorfunction(data) {
+							console.log(data);
+							layer.msg('修改失败', {
+								icon: 5,
+								time: 1000
+							}, function() {});
+						}
+					});
+					return false;
+				});
+				var uploadimgids = [{
+					"id": "#seat1",
+					"picState": 10001
+				}, {
+					"id": "#seat2",
+					"picState": 10001
+				}, {
+					"id": "#geology1",
+					"picState": 10002
+				}, {
+					"id": "#geology2",
+					"picState": 10002
+				}, {
+					"id": "#columnar1",
+					"picState": 10003
+				}, {
+					"id": "#columnar2",
+					"picState": 10003
+				}, {
+					"id": "#waterquality1",
+					"picState": 10004
+				}, {
+					"id": "#waterquality2",
+					"picState": 10004
+				}, {
+					"id": "#model1",
+					"picState": 10005
+				}, {
+					"id": "#model2",
+					"picState": 10005
+				}];
+
+				$.each(uploadimgids, function(idnex, item) {
+					var senddata = {
+						filetype: "images",
+						PicState: item.picState,
+						pointId: curpointdata.id,
+						codeNumber: curpointdata.codeNumber
+					};
+					upload.render({
+						elem: item.id,
+						url: apiUrl + '/upload/image',
+						data: senddata,
+						accept: 'images',
+						acceptMime: 'image/*',
+						size: 5120,
+						auto: false,
+						choose: function(obj) {
+							var curimgid = $(item.id + 'img').attr("layui-imgid");
+							if (curimgid != 0) {
+								this.data.id = curimgid;
+							}
+							obj.preview(function(index, file, result) {
+								$(item.id + 'img').attr("src", result);
+								obj.upload(index, file);
+							});
+						},
+						before: function(res) {
+							layer.load();
+						},
+						done: function(res) {
+							layer.closeAll('loading');
+							if (res.hasOwnProperty("springPointPic")) {
+								layer.msg('图片上传成功', {
+									icon: 1,
+									time: 1000
+								}, function() {});
+								this.data.id = res.springPointPic.pid;
+							} else {
+								layer.msg('图片上传失败', {
+									icon: 5,
+									time: 1000
+								}, function() {
+									$(item.id + 'img').attr("src", "../img/default.png");
+								});
+							}
+						},
+						error: function() {
+							layer.closeAll('loading');
+							$(item.id + 'img').attr("src", "../img/default.png");
+						},
+					});
+				});
+				// var filesListView = $('#filesList');
+				var uploadfiles = upload.render({
+					elem: "#uploadfile",
+					url: apiUrl + '/upload/file',
+					data: {
+						filetype: "file",
+						PicState: 10006,
+						poinId: curpointdata.id,
+						codeNumber: curpointdata.codeNumber
+					},
+					accept: 'file',
+					// multiple: true,
+					auto: false,
+					size: 51200,
+					choose: function(obj) {
+						if (filesListView.find("tr").length >= 20) {
+							layer.msg('附件超出限制，请先删除附件后重试！', {
+								icon: 1,
+								time: 1000 //2秒关闭（如果不配置，默认是3秒）
+							}, function() {
+								//do something
+							});
+							return false;
+						}
+						var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+						obj.preview(function(index, file, result) {
+							obj.upload(index, file);
+						});
+					},
+					before: function(res) {
+						layer.load();
+					},
+					done: function(res) {
+						layer.closeAll('loading');
+						if (res.hasOwnProperty("springPointPic")) {
+							var tr = $(['<tr id="0">', '<td>' + res.springPointPic.fileName + '</td>',  '<td>' + res.springPointPic.createTime + '</td>','<td>',
+								'<button layui-url=' + res.springPointPic.url + ' class="layui-btn layui-btn-xs demo-down">下载</button>',
+								'<button layui-pid=' + res.springPointPic.pid +
+								' class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>', '</td>', '</tr>'
+							].join(''));
+							//删除
+							tr.find('.demo-delete').on('click', function() {
+								$.ajax({
+									type: "DELETE",
+									url: apiUrl + "/upload?id=" + $(this).attr("layui-pid"),
+									// data: {
+									// 	id: curpointjson.id
+									// },
+									// dataType: "json",
+									success: function(data) {
+										console.log(data);
+										layer.msg('删除成功', {
+											icon: 1,
+											time: 1000
+										}, function() {
+											tr.remove();
+											uploadfiles.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+										});
+									},
+									error: function(data) {
+										console.log(data);
+										layer.msg('删除失败', {
+											icon: 5,
+											time: 1000
+										}, function() {});
+									}
+								});
+							});
+							//下载
+							tr.find('.demo-down').on('click', function() {
+								var a = document.createElement('a');
+								a.setAttribute('href', $(this).attr("layui-url"));
+								a.setAttribute('target', '_blank');
+								a.click();
+							});
+							filesListView.append(tr);
+							layer.msg('附件上传成功', {
+								icon: 1,
+								time: 1000
+							}, function() {});
+						} else {
+							layer.msg('附件上传失败', {
+								icon: 5,
+								time: 1000
+							}, function() {
+
+							});
+						}
+					},
+					error: function() {
+						layer.closeAll('loading');
+					},
+				});
+			});
+		</script>
+	</body>
+</html>

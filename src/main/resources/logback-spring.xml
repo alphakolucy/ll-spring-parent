@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <!--定义日志文件的存储地址,使用绝对路径-->
+    <property name="LOG_HOME" value="e:/logs"/>
+
+    <!--输出到控制台-->
+    <!--<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+    <!---->
+    <!--<encoder>-->
+    <!--<Pattern>${CONSOLE_LOG_PATTERN}</Pattern>-->
+    <!--&lt;!&ndash; 设置字符集 &ndash;&gt;-->
+    <!--<charset>UTF-8</charset>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+    <!--输出到控制台-->
+    <!-- Console 输出设置 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+        <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+    <property name="APP_NAME" value="LLHotSpring"/><!--项目名称-->
+    <!-- 按照每天生成日志文件 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>${LOG_HOME}/ll.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <!-- 异步输出 -->
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="FILE"/>
+    </appender>
+
+
+    <logger name="org.apache.ibatis.cache.decorators.LoggingCache" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="org.springframework.boot" level="DEBUG"/>
+    <root level="info">
+        <!--<appender-ref ref="ASYNC"/>-->
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!--&lt;!&ndash;开发环境:打印控制台&ndash;&gt;-->
+    <!--<springProfile name="dev">-->
+        <!--<logger name="com.nmys.view" level="debug"/>-->
+    <!--</springProfile>-->
+
+    <!--<root level="info">-->
+        <!--<appender-ref ref="CONSOLE"/>-->
+        <!--<appender-ref ref="DEBUG_FILE"/>-->
+        <!--<appender-ref ref="INFO_FILE"/>-->
+        <!--<appender-ref ref="WARN_FILE"/>-->
+        <!--<appender-ref ref="ERROR_FILE"/>-->
+    <!--</root>-->
+
+    <!--生产环境:输出到文件-->
+    <!--<springProfile name="pro">-->
+    <!--<root level="info">-->
+    <!--<appender-ref ref="CONSOLE" />-->
+    <!--<appender-ref ref="DEBUG_FILE" />-->
+    <!--<appender-ref ref="INFO_FILE" />-->
+    <!--<appender-ref ref="ERROR_FILE" />-->
+    <!--<appender-ref ref="WARN_FILE" />-->
+    <!--</root>-->
+    <!--</springProfile>-->
+    <!--<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <fork>true</fork>
+                <addResources>true</addResources>
+            </configuration>
+        </plugin>
+    </plugins>
+    </build>-->
+
+
+</configuration>

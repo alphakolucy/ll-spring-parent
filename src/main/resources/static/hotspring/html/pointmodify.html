@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <style type="text/css">
+        .show {
+            width: 750px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .show .showimg {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            border: 1px solid #707070;
+            display: inline-block;
+        }
+
+        .show .showimg .img {
+            width: 350px;
+            height: 350px;
+        }
+
+        .show .showimg .img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .show .showimg .chooseimg {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 50px;
+            width: 50px;
+            margin: -25px 0 0 -25px;
+        }
+
+        .show .showimg .chooseimg img {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .show .show-pdding {
+            margin-left: 20px;
+        }
+
+        .listpic {
+            width: 830px;
+            margin: 0 auto;
+            padding-top: 5px;
+        }
+
+        .listpic .pic {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            display: inline-block;
+            border: 1px solid #707070;
+            margin: 5px 2px;
+        }
+
+        .listpic .pic .picshow {
+            width: 150px;
+            height: 150px;
+            padding: 4px;
+        }
+
+        .listpic .pic .picshow img {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .listpic .pic .picoprate {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .listpic .pic .picoprate img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .fileupload {
+            width: 960px;
+            height: 674px;
+            font-size: 0;
+            display: block;
+            border: 1px solid #F2F2F2;
+        }
+
+        .fileupload .filetype {
+            display: inline-block;
+            width: 120px;
+            font-size: 14px;
+            background-color: rgba(242, 242, 242, 0.5);
+            vertical-align: top;
+            height: 674px;
+            color: #666666;
+        }
+
+        .fileupload .filetype ul li {
+            line-height: 40px;
+            border-bottom: 1px solid #666666;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .fileupload .filetype ul .active {
+            color: #F2F2F2;
+            background-color: #666666;
+        }
+
+        .fileupload .filetype ul li:hover {
+            color: #F2F2F2;
+            background-color: #666666;
+        }
+
+        .fileupload .filedata {
+            display: inline-block;
+            width: 840px;
+            vertical-align: top;
+            height: 674px;
+        }
+
+        .layui-none {
+            font-size: 15px;
+        }
+        .layui-tab-title .layui-this{
+            color: #FFFFFF;
+            background-color: #5FB878;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-tab" lay-filter="pointtabs">
+    <ul class="layui-tab-title">
+        <li class="layui-this">基本信息</li>
+        <li>位置图</li>
+        <li>地质图</li>
+        <li>柱状图/剖面图</li>
+        <li>水质分析</li>
+        <li>成因模式</li>
+        <li>理疗功效研究</li>
+        <li>附件</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <!--基本信息-->
+            <form class="layui-form" action="" lay-filter="pointinfo">
+                <b>基本信息</b>
+                <div class="layui-row layui-hide">
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">id</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="id" required lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="layui-row">
+                    <div class="layui-col-md3">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">编号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="codeNumber" required lay-verify="required" placeholder="请输入" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md9">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">位置名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="address" required lay-verify="required" placeholder="请输入" value="address"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">x</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="x" required lay-verify="required" value="3060227" placeholder="请输入" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">y</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="y" required lay-verify="required" value="19222257" placeholder="请输入" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">海拔(m)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="z" required lay-verify="required" placeholder="请输入" value="1500" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="layui-row">
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">涌水量(m<sub>3</sub>/D)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="waterInflow" value="100" required lay-verify="required" placeholder="请输入"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">PH</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="ph" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">开孔/出露层位</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="trepanning" required lay-verify="required" placeholder="请输入" value="开孔" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">出水段</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="waterOutlet" required lay-verify="required" placeholder="请输入" value="出水段"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">孔深(m)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="holeDepth" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">水化学类型</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="hydrochemicalType" required lay-verifxy="required" value="水化学" placeholder="请输入"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">热储单元</label>
+                            <div class="layui-input-block">
+                                <select name="reservoirUnit" id="reservoirUnit" lay-verify="" lay-filter="reservoirUnitfilter">
+                                    <option value="第一热储单元" selected>第一热储单元</option>
+                                    <option value="第二热储单元">第二热储单元</option>
+                                    <option value="第三热储单元">第三热储单元</option>
+                                    <option value="第四热储单元">第四热储单元</option>
+                                    <option value="第五热储单元">第五热储单元</option>
+                                    <option value="赤水、习水地区热卤水型">赤水、习水地区热卤水型</option>
+                                    <option value="变质岩区构造裂隙型">变质岩区构造裂隙型</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">状态</label>
+                            <div class="layui-input-block">
+                                <select name="status" id="status" lay-verify="" lay-filter="statusfilter">
+                                    <option value="正常" selected>正常</option>
+                                    <option value="施工中">施工中</option>
+                                    <option value="无资料">无资料 </option>
+                                    <option value="废弃">废弃</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <b>理疗天然矿泉水水质指标</b>
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">水温(℃)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="waterTemperature" required lay-verify="required" placeholder="请输入" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">TDS(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="dissolvedSolids" required lay-verify="required" value="0" placeholder="请输入"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">CO<sub>2</sub>(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="co2" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">H<sub>2</sub>S<sup>+</sup>HS<sup>-</sup>(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="hydrothion" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">H<sub>2</sub>SiO<sub>3</sub>(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="hsio" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">HBO<sub>2</sub>(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="hbo2" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Br<sup>-</sup>(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="br2" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">I<sup>-</sup>(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="i2" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Fe<sup>2+</sup>+Fe<sup>3+</sup>(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="fe" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">As(mg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="asa" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><sup>222</sup>Rn(Bg/L)</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="rn" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <b>其他</b>
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">温泉地区流行病学调查</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="epidemiologicalSurvey" required lay-verify="required" placeholder="请输入" value="0"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">温泉理疗功效干预实验</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="efficacyInterventionExperiment" required lay-verify="required" placeholder="请输入"
+                                       value="0" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">理疗温泉成因解剖</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="geneticDissection" required lay-verify="required" placeholder="请输入" value="0"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
+                    </div>
+                </div>
+            </form>
+
+            <!--待更新-->
+
+        </div>
+
+        <div class="layui-tab-item">
+            <!--位置图-->
+            <div>
+                <input style="width: 250px; display: inline-block;" class="layui-input" id="seatplottingScale" value=""
+                       placeholder="请输入比例尺" />
+                <button type="button" class="layui-btn" id="seat">
+                    <i class="layui-icon">&#xe60d;</i>上传图片
+                </button>
+                <div>
+                    <table class="layui-hide" id="list0" lay-data="{id: 'pointlist0'}" lay-filter="imagedemo"></table>
+                </div>
+            </div>
+            <!-- <div class="show">
+                            <div class="showimg">
+                                <div class="img"><img src="../img/default.png" id="seat1img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="seat1" /></div>
+                            </div>
+                            <div class="showimg show-pdding">
+                                <div class="img"><img src="../img/default.png" id="seat2img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="seat2" /></div>
+                            </div>
+                        </div> -->
+        </div>
+
+        <div class="layui-tab-item">
+            <!--地质图-->
+            <div>
+                <input style="width: 250px; display: inline-block;" class="layui-input" id="geologyplottingScale" value=""
+                       placeholder="请输入比例尺" />
+                <button type="button" class="layui-btn" id="geology">
+                    <i class="layui-icon">&#xe60d;</i>上传图片
+                </button>
+                <div>
+                    <table class="layui-hide" id="list1" lay-data="{id: 'pointlist1'}" lay-filter="imagedemo"></table>
+                </div>
+            </div>
+            <!-- <div class="show">
+                            <div class="showimg">
+                                <div class="img"><img src="../img/default.png" id="geology1img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="geology1" /></div>
+                            </div>
+                            <div class="showimg show-pdding">
+                                <div class="img"><img src="../img/default.png" id="geology2img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="geology2" /></div>
+                            </div>
+                        </div> -->
+        </div>
+        <div class="layui-tab-item">
+            <!--柱状图/剖面图-->
+            <div>
+                <input style="width: 250px; display: inline-block;" class="layui-input" id="columnarplottingScale" value=""
+                       placeholder="请输入比例尺" />
+                <button type="button" class="layui-btn" id="columnar">
+                    <i class="layui-icon">&#xe60d;</i>上传图片
+                </button>
+                <div>
+                    <table class="layui-hide" id="list2" lay-data="{id: 'pointlist2'}" lay-filter="imagedemo"></table>
+                </div>
+            </div>
+            <!-- <div class="show">
+                            <div class="showimg">
+                                <div class="img"><img src="../img/default.png" id="columnar1img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="columnar1" /></div>
+                            </div>
+                            <div class="showimg show-pdding">
+                                <div class="img"><img src="../img/default.png" id="columnar2img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="columnar2" /></div>
+                            </div>
+                        </div> -->
+        </div>
+        <div class="layui-tab-item">
+            <!--水质分析-->
+            <div>
+                <input style="width: 250px; display: none; " class="layui-input" id="waterqualityplottingScale" value=""
+                       placeholder="请输入比例尺"   />
+                <button type="button" class="layui-btn" id="waterquality">
+                    <i class="layui-icon">&#xe60d;</i>上传图片
+                </button>
+                <div>
+                    <table class="layui-hide" id="list3" lay-data="{id: 'pointlist3'}" lay-filter="imagedemo"></table>
+                </div>
+            </div>
+            <!-- <div class="show">
+                            <div class="showimg">
+                                <div class="img"><img src="../img/default.png" id="waterquality1img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="waterquality1" /></div>
+                            </div>
+                            <div class="showimg show-pdding">
+                                <div class="img"><img src="../img/default.png" id="waterquality2img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="waterquality2" /></div>
+                            </div>
+                        </div> -->
+        </div>
+        <div class="layui-tab-item">
+            <!--成因模式-->
+            <div>
+                <input style="width: 250px; display: none;" class="none" id="modelplottingScale" value=""
+                       placeholder="请输入比例尺"  />
+                <button type="button" class="layui-btn" id="model">
+                    <i class="layui-icon">&#xe60d;</i>上传图片
+                </button>
+                <div>
+                    <table class="layui-hide" id="list4" lay-data="{id: 'pointlist4'}" lay-filter="imagedemo"></table>
+                </div>
+            </div>
+            <!-- <div class="show">
+                            <div class="showimg">
+                                <div class="img"><img src="../img/default.png" id="model1img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="model1" /></div>
+                            </div>
+                            <div class="showimg show-pdding">
+                                <div class="img"><img src="../img/default.png" id="model2img"></div>
+                                <div class="chooseimg"><img src="../img/addimg.png" id="model2" /></div>
+                            </div>
+                        </div> -->
+        </div>
+        <div class="layui-tab-item">
+            <!--理疗功效研究-->
+            <div class="fileupload">
+                <div class="filetype" id="filetype1">
+                    <ul>
+                        <li class="active"  packagetype="6">地区流行病学调查</li>
+                        <li   packagetype="7">理疗功效干预实验</li>
+                    </ul>
+                </div>
+                <div class="filedata">
+                    <button type="button" class="layui-btn" id="uploadfile1">
+                        <i class="layui-icon">&#xe67c;</i>上传附件
+                    </button>
+                    <div>
+                        <table class="layui-hide" id="list6" lay-data="{id: 'pointlist6'}" lay-filter="demo1"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <!--附件-->
+            <div class="fileupload">
+                <div class="filetype" id="filetype">
+                    <ul>
+                        <li class="active" packagetype="0">收集资料</li>
+                        <li packagetype="1">野外资料</li>
+                        <li packagetype="2">测试分析报告</li>
+                        <li packagetype="3">成果报告</li>
+                        <li packagetype="4">照片</li>
+                        <li packagetype="5">企业资料</li>
+                    </ul>
+                </div>
+                <div class="filedata">
+                    <button type="button" class="layui-btn" id="uploadfile">
+                        <i class="layui-icon">&#xe67c;</i>上传附件
+                    </button>
+                    <div>
+                        <table class="layui-hide" id="list" lay-data="{id: 'pointlist'}" lay-filter="demo"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../Api.js"></script>
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript">
+    var curpointdata = parent.curpointjson;
+    layui.use(['upload', 'element', 'form', 'jquery', 'table'], function() {
+        var upload = layui.upload;
+        var element = layui.element;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var table = layui.table;
+        //获取数据接口
+        var inputs = $("form").find("input");
+        $.each(inputs, function(index, item) {
+            var attrname = $(this).attr("name");
+
+            $(item).val(curpointdata[attrname]);
+            if (waterstanard.hasOwnProperty(attrname)) {
+                var val = $(this).val();
+                if (curpointdata[attrname] > waterstanard[attrname]) {
+                    $(this).parent().parent().css("color", "#FF0000");
+                    $(this).css("color", "#FF0000");
+                }
+            }
+            $(item).on("input", function() {
+                if (waterstanard.hasOwnProperty(attrname)) {
+                    var val = $(this).val();
+                    if (val > waterstanard[attrname]) {
+                        $(this).parent().parent().css("color", "#FF0000");
+                        $(this).css("color", "#FF0000");
+                    } else {
+                        $(this).parent().parent().css("color", "#000000");
+                        $(this).css("color", "#000000");
+                    }
+                }
+            })
+            //遍历得到的每一个jquery对象
+        });
+        form.render();
+        $("#reservoirUnit").val(curpointdata.reservoirUnit);
+        $("#status").val(curpointdata.status);
+
+        form.render("select");
+
+        function removeItem(src, cb) {
+            var counter = src.length - 1;
+            while (true) {
+
+                var result = cb(src[counter]);
+
+                if (result) {
+
+                    src.splice(counter, 1);
+
+                    counter = src.length - 1;
+                } else {
+                    counter--;
+                }
+
+                if (counter < 0) {
+                    break;
+                }
+            }
+        }
+
+        //监听
+        table.on('tool(imagedemo)', function(obj) {
+            var data = obj.data;
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if (obj.event === 'down') {
+                var a = document.createElement('a');
+                a.setAttribute('href', data.url);
+                a.setAttribute('target', '_blank');
+                a.click();
+            } else if (obj.event === 'detail') {
+                var imgHtml = "<div style='text-align:center'><img src='" + data.url + "' /></div>";
+                //弹出层
+                var imglayer = layer.open({
+                    type: 1,
+                    shade: 0.8,
+                    offset: 'auto',
+                    area: ['300px', '300px'],
+                    shadeClose: true, //点击外围关闭弹窗
+                    scrollbar: true, //不现实滚动条
+                    title: "图片预览" + data.createTime, //不显示标题
+                    content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    cancel: function() {
+                        //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+                    }
+                });
+                layer.full(imglayer);
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function(index) {
+                    layer.close(index);
+                    $.ajax({
+                        type: "DELETE",
+                        url: apiUrl + "/springPoint/deletePicFileHis?id=" + data.id,
+                        success: function(data) {
+                            layer.msg('删除成功', {
+                                icon: 1,
+                                time: 1000
+                            }, function() {
+                                obj.del();
+                                removeItem(imagelist[imagesidnex], item => item.id == data.id);
+                                if (imagelist[imagesidnex].length == 0) {
+                                    table.reload('pointlist' + imagesidnex, {
+                                        data: imagelist[imagesidnex]
+                                    });
+                                }
+                            });
+                        },
+                        error: function(data) {
+                            console.log(data);
+                            layer.msg('删除失败', {
+                                icon: 5,
+                                time: 1000
+                            }, function() {});
+                        }
+                    });
+                });
+            }
+        });
+
+
+        //监听提交
+        form.on('submit(formDemo)', function(data) {
+            var fromdata = data.field;
+            //添加温泉点
+            $.ajax({
+                type: "PUT",
+                url: apiUrl + "/springPoint/" + curpointdata.id,
+                data: fromdata,
+                dataType: "json",
+                success: function(data) {
+                    layer.msg('修改成功', {
+                        icon: 1,
+                        time: 1000
+                    }, function() {});
+                },
+                errorfunction(data) {
+                    console.log(data);
+                    layer.msg('修改失败', {
+                        icon: 5,
+                        time: 1000
+                    }, function() {});
+                }
+            });
+            return false;
+        });
+        // form.val("pointinfo", curpointdata);
+        var imagesidnex = 0;
+        var imagelist = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
+        element.on('tab(pointtabs)', function(elem) {
+            switch (elem.index) {
+                case 0:
+                {
+                    break;
+                }
+                case 1:
+                {
+                    imagesidnex = 0;
+                    table.reload('pointlist' + imagesidnex, {
+                        data: imagelist[imagesidnex]
+                    });
+                    break;
+                }
+                case 2:
+                {
+                    imagesidnex = 1;
+                    table.reload('pointlist' + imagesidnex, {
+                        data: imagelist[imagesidnex]
+                    });
+                    break;
+                }
+                case 3:
+                {
+                    imagesidnex = 2;
+                    table.reload('pointlist' + imagesidnex, {
+                        data: imagelist[imagesidnex]
+                    });
+                    break;
+                }
+                case 4:
+                {
+                    imagesidnex = 3;
+                    table.reload('pointlist' + imagesidnex, {
+                        data: imagelist[imagesidnex]
+                    });
+                    break;
+                }
+                case 5:
+                {
+                    imagesidnex = 4;
+                    table.reload('pointlist' + imagesidnex, {
+                        data: imagelist[imagesidnex]
+                    });
+                    break;
+                }
+                case 6:
+                {
+                    break;
+                }
+                default:
+                    break;
+            }
+            console.log(elem.index);
+        });
+        //获取历史图片并渲染成表格,同时渲染上传控件
+        var picStates = [{
+            "id": "#seat",
+            "picState": 10001
+        }, {
+            "id": "#geology",
+            "picState": 10002
+        }, {
+            "id": "#columnar",
+            "picState": 10003
+        }, {
+            "id": "#waterquality",
+            "picState": 10004
+        }, {
+            "id": "#model",
+            "picState": 10005
+        }];
+        $.each(picStates, function(index, item) {
+            $.ajax({
+                type: "GET",
+                url: apiUrl + "/springPoint/findPicFileHistory",
+                dataType: "json",
+                data: {
+                    "pointId": curpointdata.id,
+                    "picState": item.picState
+                },
+                success: function(data) {
+                    if (data.code == 200) {
+                        if (index==3||index ==4) {
+                            imagelist[index] = data.springPicFileList;
+                            table.render({
+                                elem: '#list' + index,
+                                id: 'pointlist' + index,
+                                cols: [
+                                    [{
+                                        field: 'id',
+                                        title: 'ID',
+                                        hide: true,
+                                    }, {
+                                        field: 'fileName',
+                                        title: '文件名称'
+                                    },  {
+                                        field: 'createTime',
+                                        title: '上传时间'
+                                    },
+                                        {
+                                            title: '操作',
+                                            width: 200,
+                                            toolbar: '#imagebarDemo'
+                                        }
+                                    ]
+                                ],
+                                data: imagelist[index],
+                                page: true
+                            });
+                        }else {
+                            imagelist[index] = data.springPicFileList;
+                            table.render({
+                                elem: '#list' + index,
+                                id: 'pointlist' + index,
+                                cols: [
+                                    [{
+                                        field: 'id',
+                                        title: 'ID',
+                                        hide: true,
+                                    }, {
+                                        field: 'fileName',
+                                        title: '文件名称'
+                                    }, {
+                                        field: 'plottingScale',
+                                        title: '比例尺'
+                                    }, {
+                                        field: 'createTime',
+                                        title: '上传时间'
+                                    },
+                                        {
+                                            title: '操作',
+                                            width: 200,
+                                            toolbar: '#imagebarDemo'
+                                        }
+                                    ]
+                                ],
+                                data: imagelist[index],
+                                page: true
+                            });
+                        }
+                    }
+                    else {
+                        table.render({
+                            elem: '#list' + index,
+                            id: 'pointlist' + index,
+                            cols: [
+                                [{
+                                    field: 'id',
+                                    title: 'ID',
+                                    hide: true,
+                                }, {
+                                    field: 'fileName',
+                                    title: '文件名称'
+                                }, {
+                                    field: 'plottingScale',
+                                    title: '比例尺'
+                                }, {
+                                    field: 'createTime',
+                                    title: '上传时间'
+                                },
+                                    {
+                                        title: '操作',
+                                        width: 160,
+                                        toolbar: '#imagebarDemo'
+                                    }
+                                ]
+                            ],
+                            data: imagelist[index],
+                            page: true
+                        });
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                    // layer.msg('删除失败', {
+                    // 	icon: 5,
+                    // 	time: 1000
+                    // }, function() {});
+                }
+            });
+            upload.render({
+                elem: item.id,
+                url: apiUrl + '/upload/image',
+                data: {
+                    filetype: "images",
+                    PicState: item.picState,
+                    pointId: curpointdata.id,
+                    codeNumber: curpointdata.codeNumber,
+                    plottingScale: 0,
+                },
+                auto: false,
+                accept: 'images',
+                acceptMime: 'image/*',
+                size: 20480,
+                choose: function(obj) {
+                    console.log($(item.id + "plottingScale").val());
+                    var scaleval = $(item.id + "plottingScale").val().replace(/(^\s*)|(\s*$)/g, ''); //去除空格;;
+                    if (item.picState==10004||item.picState==10005){
+                        this.data.plottingScale = scaleval;
+                        obj.preview(function(index1, file, result) {
+                            obj.upload(index1, file);
+                        });
+                    } else {
+                        if (scaleval == '' || scaleval == undefined || scaleval == null) {
+                            layer.msg('比例尺不能为空', {
+                                icon: 5,
+                                time: 1000
+                            }, function() {});
+                            return false;
+                        } else {
+                            this.data.plottingScale = scaleval;
+                            obj.preview(function(index1, file, result) {
+                                obj.upload(index1, file);
+                            });
+                        }
+                    }
+                },
+                before: function(res) {
+                    layer.load();
+                },
+                done: function(res) {
+                    layer.closeAll('loading');
+                    if (res.hasOwnProperty("springPicFile")) {
+                        layer.msg('图片上传成功', {
+                            icon: 1,
+                            time: 1000
+                        }, function() {
+                            imagelist[index].push(res.springPicFile);
+                            table.reload('pointlist' + index, {
+                                data: imagelist[index]
+                            });
+                        });
+                    } else {
+                        layer.msg('图片上传失败', {
+                            icon: 5,
+                            time: 1000
+                        }, function() {
+
+                        });
+                    }
+                },
+                error: function() {
+                    layer.msg('图片上传失败', {
+                        icon: 5,
+                        time: 1000
+                    }, function() {
+
+                    });
+                    layer.closeAll('loading');
+                    // $(item.id + 'img').attr("src", "../img/default.png");
+                },
+            });
+        })
+
+        //监听工具条
+        table.on('tool(imagedemo)', function(obj) {
+            var data = obj.data;
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if (obj.event === 'down') {
+                var a = document.createElement('a');
+                a.setAttribute('href', data.url);
+                a.setAttribute('target', '_blank');
+                a.click();
+            } else if (obj.event === 'detail') {
+                var imgHtml = "<div style='text-align:center'><img src='" + data.url + "' /></div>";
+                //弹出层
+                var imglayer = layer.open({
+                    type: 1,
+                    shade: 0.8,
+                    offset: 'auto',
+                    area: ['300px', '300px'],
+                    shadeClose: true, //点击外围关闭弹窗
+                    scrollbar: true, //不现实滚动条
+                    title: "图片预览" + data.createTime, //不显示标题
+                    content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    cancel: function() {
+                        //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+                    }
+                });
+                layer.full(imglayer);
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function(index) {
+                    layer.close(index);
+                    $.ajax({
+                        type: "DELETE",
+                        url: apiUrl + "/springPoint/deletePicFileHis?id=" + data.id,
+                        success: function(data) {
+                            layer.msg('删除成功', {
+                                icon: 1,
+                                time: 1000
+                            }, function() {
+                                obj.del();
+                                removeItem(imagelist[imagesidnex], item => item.id == data.id);
+                                if (imagelist[imagesidnex].length == 0) {
+                                    table.reload('pointlist' + imagesidnex, {
+                                        data: imagelist[imagesidnex]
+                                    });
+                                }
+                            });
+                        },
+                        error: function(data) {
+                            console.log(data);
+                            layer.msg('删除失败', {
+                                icon: 5,
+                                time: 1000
+                            }, function() {});
+                        }
+                    });
+                });
+            }
+        });
+
+        table.on('tool(demo)', function(obj) {
+            var data = obj.data;
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if (obj.event === 'down') {
+                var a = document.createElement('a');
+                a.setAttribute('href', data.url);
+                a.setAttribute('target', '_blank');
+                a.click();
+            } else if (obj.event === 'detail') {
+                var imgHtml = "<div style='text-align:center'><img src='" + data.url + "' /></div>";
+                //弹出层
+                var imglayer = layer.open({
+                    type: 1,
+                    shade: 0.8,
+                    offset: 'auto',
+                    area: ['300px', '300px'],
+                    shadeClose: true, //点击外围关闭弹窗
+                    scrollbar: true, //不现实滚动条
+                    title: "图片预览" + data.createTime, //不显示标题
+                    content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    cancel: function() {
+                        //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+                    }
+                });
+                layer.full(imglayer);
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function(index) {
+                    layer.close(index);
+                    $.ajax({
+                        type: "DELETE",
+                        url: apiUrl + "/springPoint/deletePicFileHis?id=" + data.id,
+                        success: function(data) {
+                            layer.msg('删除成功', {
+                                icon: 1,
+                                time: 1000
+                            }, function() {
+                                obj.del();
+                                removeItem(fileslist[packagetype], item => item.id == data.id);
+                                if (fileslist[packagetype].length == 0) {
+                                    table.reload('pointlist', {
+                                        data: fileslist[packagetype]
+                                    });
+                                }
+                            });
+                        },
+                        error: function(data) {
+                            console.log(data);
+                            layer.msg('删除失败', {
+                                icon: 5,
+                                time: 1000
+                            }, function() {});
+                        }
+                    });
+                });
+            }
+        });
+        table.on('tool(demo1)', function(obj) {
+            var data = obj.data;
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if (obj.event === 'down') {
+                var a = document.createElement('a');
+                a.setAttribute('href', data.url);
+                a.setAttribute('target', '_blank');
+                a.click();
+            } else if (obj.event === 'detail') {
+                var imgHtml = "<div style='text-align:center'><img src='" + data.url + "' /></div>";
+                //弹出层
+                var imglayer = layer.open({
+                    type: 1,
+                    shade: 0.8,
+                    offset: 'auto',
+                    area: ['300px', '300px'],
+                    shadeClose: true, //点击外围关闭弹窗
+                    scrollbar: true, //不现实滚动条
+                    title: "图片预览" + data.createTime, //不显示标题
+                    content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    cancel: function() {
+                        //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+                    }
+                });
+                layer.full(imglayer);
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function(index) {
+                    layer.close(index);
+                    $.ajax({
+                        type: "DELETE",
+                        url: apiUrl + "/springPoint/deletePicFileHis?id=" + data.id,
+                        success: function(data) {
+                            layer.msg('删除成功', {
+                                icon: 1,
+                                time: 1000
+                            }, function() {
+                                obj.del();
+                                removeItem(fileslist1[packagetype1 - 6], item => item.id == data.id);
+                                if (fileslist1[packagetype1 - 6].length == 0) {
+                                    table.reload('pointlist6', {
+                                        data: fileslist1[packagetype1 - 6]
+                                    });
+                                }
+                            });
+                        },
+                        error: function(data) {
+                            console.log(data);
+                            layer.msg('删除失败', {
+                                icon: 5,
+                                time: 1000
+                            }, function() {});
+                        }
+                    });
+                });
+            }
+        });
+        var fileslist = [
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+        ];
+        var packagetype = 0;
+        var fileslist1 = [
+            [],
+            []
+        ];
+        var packagetype1 = 6;
+        //切换附件类型
+        $("#filetype ul li").on("click", function() {
+            if ($(this).hasClass('active')) {
+                return false;
+            } else {
+                var listli = $("#filetype").find("li");
+                listli.removeClass('active');
+                $(this).addClass('active');
+                packagetype = $(this).attr("packagetype");
+                table.reload('pointlist', {
+                    data: fileslist[packagetype]
+                });
+            }
+
+        });
+        //切换附件类型
+        $("#filetype1 ul li").on("click", function() {
+            if ($(this).hasClass('active')) {
+                return false;
+            } else {
+                var listli = $("#filetype1").find("li");
+                listli.removeClass('active');
+                $(this).addClass('active');
+                packagetype1 = $(this).attr("packagetype");
+                table.reload('pointlist6', {
+                    data: fileslist1[packagetype1 - 6]
+
+                });
+                console.log("fileslist1"+fileslist1[packagetype1 - 6].toString())
+            }
+
+        });
+        var packagetypes = [0, 1, 2, 3, 4, 5];
+        var packagetypes1 = [6, 7];
+        $.each(packagetypes, function(index, item) {
+            $.ajax({
+                type: "GET",
+                url: apiUrl + "/springPoint/findPointAllPicFile",
+                dataType: "json",
+                data: {
+                    "pointId": curpointdata.id,
+                    "picState": 10006,
+                    "packageType": item
+                },
+                success: function(data) {
+                    if (data.code == 200) {
+                        fileslist[index] = data.springPicFileList;
+                        if (index == packagetype) {
+                            table.render({
+                                elem: '#list',
+                                id: 'pointlist',
+                                cols: [
+                                    [{
+                                        field: 'id',
+                                        title: 'ID',
+                                        hide: true,
+                                    }, {
+                                        field: 'fileName',
+                                        title: '文件名称'
+                                    }, {
+                                        field: 'createTime',
+                                        title: '上传时间'
+                                    },
+                                        {
+                                            title: '操作',
+                                            width: 160,
+                                            toolbar: '#barDemo'
+                                        }
+                                    ]
+                                ],
+                                data: fileslist[packagetype],
+                                page: true
+                            });
+                            // table.reload('pointlist', {
+                            // 	data: fileslist[packagetype]
+                            // });
+                        }
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                    // layer.msg('删除失败', {
+                    // 	icon: 5,
+                    // 	time: 1000
+                    // }, function() {});
+                }
+            });
+        });
+        $.each(packagetypes1, function(index, item) {
+            $.ajax({
+                type: "GET",
+                url: apiUrl + "/springPoint/findPointAllPicFile",
+                dataType: "json",
+                data: {
+                    "pointId": curpointdata.id,
+                    "picState": 10007,
+                    "packageType": item
+                },
+                success: function(data) {
+                    if (data.code == 200) {
+                        fileslist1[index] = data.springPicFileList;
+                        if (index + 6 == packagetype1) {
+                            table.render({
+                                elem: '#list6',
+                                id: 'pointlist6',
+                                cols: [
+                                    [{
+                                        field: 'id',
+                                        title: 'ID',
+                                        hide: true,
+                                    }, {
+                                        field: 'fileName',
+                                        title: '文件名称'
+                                    }, {
+                                        field: 'createTime',
+                                        title: '上传时间'
+                                    },
+                                        {
+                                            title: '操作',
+                                            width: 160,
+                                            toolbar: '#barDemo'
+                                        }
+                                    ]
+                                ],
+                                data: fileslist1[packagetype1 - 6],
+                                page: true
+                            });
+                            // table.reload('pointlist', {
+                            // 	data: fileslist[packagetype]
+                            // });
+                        }
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                    // layer.msg('删除失败', {
+                    // 	icon: 5,
+                    // 	time: 1000
+                    // }, function() {});
+                }
+            });
+        });
+        // var filesListView = $('#filesList');
+        var uploadfiles = upload.render({
+            elem: "#uploadfile",
+            url: apiUrl + '/upload/file',
+            data: {
+                filetype: "file",
+                PicState: 10006,
+                poinId: curpointdata.id,
+                codeNumber: curpointdata.codeNumber,
+                packageType: packagetype,
+            },
+            accept: 'file',
+            // multiple: true,
+            auto: false,
+            size: 102400,
+            choose: function(obj) {
+                this.data.packageType = packagetype;
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                obj.preview(function(index, file, result) {
+                    obj.upload(index, file);
+                });
+            },
+            before: function(res) {
+                layer.load();
+            },
+            done: function(res) {
+                layer.closeAll('loading');
+                if (res.hasOwnProperty("springPicFile")) {
+                    layer.msg('附件上传成功', {
+                        icon: 1,
+                        time: 1000
+                    }, function() {
+                        fileslist[packagetype].push(res.springPicFile);
+                        table.reload('pointlist', {
+                            data: fileslist[packagetype]
+                        });
+                    });
+                } else {
+                    layer.msg('附件上传失败', {
+                        icon: 5,
+                        time: 1000
+                    }, function() {
+
+                    });
+                }
+            },
+            error: function() {
+                layer.msg('附件上传失败', {
+                    icon: 5,
+                    time: 1000
+                }, function() {
+
+                });
+                layer.closeAll('loading');
+            },
+        });
+        var uploadfiles1 = upload.render({
+            elem: "#uploadfile1",
+            url: apiUrl + '/upload/file',
+            data: {
+                filetype: "file",
+                PicState: 10007,
+                poinId: curpointdata.id,
+                codeNumber: curpointdata.codeNumber,
+                packageType: packagetype1,
+            },
+            accept: 'file',
+            // multiple: true,
+            auto: false,
+            size: 102400,
+            choose: function(obj) {
+                this.data.packageType = packagetype1;
+                var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                obj.preview(function(index, file, result) {
+                    obj.upload(index, file);
+                });
+            },
+            before: function(res) {
+                layer.load();
+            },
+            done: function(res) {
+                layer.closeAll('loading');
+                if (res.hasOwnProperty("springPicFile")) {
+                    layer.msg('附件上传成功', {
+                        icon: 1,
+                        time: 1000
+                    }, function() {
+                        fileslist1[packagetype1 - 6].push(res.springPicFile);
+                        table.reload('pointlist6', {
+                            data: fileslist1[packagetype1 - 6]
+                        });
+                    });
+                } else {
+                    layer.msg('附件上传失败', {
+                        icon: 5,
+                        time: 1000
+                    }, function() {
+
+                    });
+                }
+            },
+            error: function() {
+                layer.msg('附件上传失败', {
+                    icon: 5,
+                    time: 1000
+                }, function() {
+
+                });
+                layer.closeAll('loading');
+            },
+        });
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="down">下载</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="imagebarDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="down">下载</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+</body>
+</html>

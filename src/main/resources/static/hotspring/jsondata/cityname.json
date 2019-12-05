@@ -1,0 +1,11 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1350.966505,5898.652315]},"properties":{"name":"贵阳市","x":1350.966505,"y":5898.652315}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1595.034355,5890.183607]},"properties":{"name":"凯里市","x":1595.034355,"y":5890.183607}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1492.434349,5813.840257]},"properties":{"name":"都匀市","x":1492.434349,"y":5813.840257}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1187.793329,5810.364366]},"properties":{"name":"安顺市","x":1187.793329,"y":5810.364366}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[980.359616,5553.453293]},"properties":{"name":"兴义市","x":980.359616,"y":5553.453293}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[952.355158,5883.790853]},"properties":{"name":"六盘水市","x":952.355158,"y":5883.790853}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1057.424203,6041.106503]},"properties":{"name":"毕节市","x":1057.424203,"y":6041.106503}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1377.602036,6124.733117]},"properties":{"name":"遵义市","x":1377.602036,"y":6124.733117}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1818.897017,6153.907259]},"properties":{"name":"铜仁市","x":1818.897017,"y":6153.907259}}
+]}

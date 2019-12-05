@@ -1,0 +1,19 @@
+{"type":"FeatureCollection", "features": [
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1120.8655193008544,5498.396310941174]},"properties":{"ID":98,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1125.0505620229858,5500.169658379008]},"properties":{"ID":99,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1133.4438985774239,5500.351522517122]},"properties":{"ID":100,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1138.3408580810117,5497.784909641633]},"properties":{"ID":101,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1132.6021828123958,5488.41858766718]},"properties":{"ID":102,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1118.3331982249044,5492.45787228844]},"properties":{"ID":103,"name":"б"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1731.255690547413,6208.175585585616]},"properties":{"ID":393,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1740.5919514550733,6207.336892094206]},"properties":{"ID":394,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1744.6743196789596,6201.52751786363]},"properties":{"ID":395,"name":"ɽ"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1747.1337609476207,6195.643270809479]},"properties":{"ID":396,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1745.7175046201087,6186.76588287322]},"properties":{"ID":397,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1275.407847331508,6071.31627684373]},"properties":{"ID":502,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1281.2159575193068,6075.331760430357]},"properties":{"ID":503,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1287.8845284756683,6075.761990814638]},"properties":{"ID":504,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1293.6209335994201,6071.818212292058]},"properties":{"ID":505,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1294.8399196882174,6066.655447680681]},"properties":{"ID":506,"name":"��"}},
+{"type":"Feature","geometry":{"type":"Point","coordinates":[1293.5492285353732,6059.628351404086]},"properties":{"ID":507,"name":"б"}}
+]}

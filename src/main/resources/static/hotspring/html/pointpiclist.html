@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../layui/css/layui.css"/>
+</head>
+<body>
+<div class="layui-form" style="padding: 10px 0 0 10px;">
+    <div class="layui-inline">
+        <select name="selectfilter" lay-verify="" lay-filter="selectfilter">
+            <option value="codeNumber" selected>编号</option>
+            <option value="fileName">文件名</option>
+            <option value="createTime">创建时间</option>
+        </select>
+    </div>
+    <div class="layui-inline"><input class="layui-input" style="width: 250px;display: inline-block;"
+                                     id="searchvaladress"
+                                     placeholder="请输入关键字"/>
+        <button class="layui-btn" style="width: 100px;" id="searchaddress">查询</button>
+    </div>
+    <!--			<div class="layui-inline">-->
+    <!--				<button class="layui-btn" style="width: 100px;" id="import">导入</button>-->
+    <!--				<button class="layui-btn" style="width: 100px;" id="export">导出</button>-->
+    <!--			</div>-->
+</div>
+<div>
+    <table class="layui-hide" id="list" lay-data="{id: 'pointlist'}" lay-filter="demo"></table>
+</div>
+<script type="text/javascript" src="../Api.js"></script>
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript">
+    var curpointjson = {};
+
+    layui.use(['table', 'form', 'jquery', 'layer', 'upload'], function () {
+        var table = layui.table;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var searchfilter = "codeNumber";
+        //查询
+        $("#searchaddress").on("click", function () {
+            var searchval = $("#searchvaladress").val();
+            table.reload('pointlist', {
+                where: {
+                    [searchfilter]: searchval,
+                },
+                page: {
+                    curr: 1
+                }
+            });
+        });
+        //导出
+        $("#export").on("click", function () {
+            parent.exportdata();
+        });
+        //导入
+        var uploadfiles = upload.render({
+            elem: "#import",
+            url: apiUrl + '/springPoint/importToSave',
+            data: {},
+            accept: 'file',
+            // multiple: true,
+            auto: false,
+            size: 10240,
+            choose: function (obj) {
+            },
+            before: function (res) {
+                layer.load();
+            },
+            done: function (res) {
+                layer.closeAll('loading');
+                layer.msg('数据导入成功', {
+                    icon: 1,
+                    time: 1000
+                }, function () {
+                });
+                parent.getpointlist();
+            },
+            error: function () {
+                layer.msg('数据导入失败', {
+                    icon: 5,
+                    time: 1000
+                }, function () {
+
+                });
+                layer.closeAll('loading');
+            },
+        });
+        //选择查询字段
+        form.on('select(selectfilter)', function (data) {
+            // console.log(data.elem); //得到select原始DOM对象
+            searchfilter = data.value;
+            // console.log(data.value); //得到被选中的值
+            // console.log(data.othis); //得到美化后的DOM对象
+        });
+
+
+        table.render({
+            elem: '#list',
+            id: 'pointlist',
+            // limit: 3,
+            // limits: [3, 6, 9, 12],
+            url: apiUrl + "/springPoint/findPointAllPic",
+            request: {
+                pageName: 'page',
+                limitName: 'size'
+            },
+            parseData: function (res) { //res 即为原始返回的数据
+                console.log(res.springPicFiles)
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.message, //解析提示文本
+                    "count": res.springPicFiles.totalElements, //解析数据长度
+                    "data": res.springPicFiles.content //解析数据列表
+                };
+            },
+            response: {
+                statusName: 'code',
+                statusCode: 200,
+                // msgName: 'message',
+                // countName: 'springPoints.totalPages',
+                // dataName: 'springPoints.content'
+            },
+            cols: [
+                [{
+                    field: 'id',
+                    title: 'ID',
+                    hide: true,
+                }, {
+                    field: 'codeNumber',
+                    title: '编号',
+                    sort: true
+                }, {
+                    field: 'fileName',
+                    title: '文件名'
+                }, {
+                    field: 'createTime',
+                    title: '创建时间',
+                    sort: true
+                }, {
+                        title: '操作',
+                        field: 'url',
+                        width: 160,
+                        toolbar: '#barDemo'
+                }
+                ]
+            ],
+            page: true
+        });
+        //监听工具条
+        table.on('tool(demo)', function (obj) {
+            var data = obj.data;
+            curpointjson = data;
+            if (obj.event === 'detail') {
+                layer.open({
+                    type: 2,
+                    title: "温泉点图片",
+                    area: ['1400px', '800px'],
+                    shadeClose: true, //点击遮罩关闭
+                    content: data.url
+                });
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    layer.close(index);
+                    $.ajax({
+                        type: "DELETE",
+                        url: apiUrl + "/springPoint/deletePicFileHis?id=" + curpointjson.id,
+                        // data: {
+                        // 	id: curpointjson.id
+                        // },
+                        dataType: "json",
+                        success: function (data) {
+                            layer.msg('删除成功', {
+                                icon: 1,
+                                time: 1000
+                            }, function () {
+                            });
+                            obj.del();
+                        },
+                        errorfunction(data) {
+                            console.log(data);
+                            layer.msg('删除失败', {
+                                icon: 5,
+                                time: 1000
+                            }, function () {
+                            });
+                        }
+                    });
+                });
+            } else if (obj.event === 'download') {
+                layer.open({
+                    type: 2,
+                    title: "下载图片",
+                    area: ['1000px', '800px'],
+                    shadeClose: true, //点击遮罩关闭
+                    content: data.url
+                });
+            }
+        });
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+<!--    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+<!--    <button layui-url=data.url class="layui-btn layui-btn-xs demo-down" lay-event="download">下载</button>-->
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+</body>
+</html>

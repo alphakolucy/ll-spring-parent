@@ -1,0 +1,400 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #FFFFFF;
+   /* left: 5%;
+    top: 5%;*/
+
+}
+
+#biaoti {
+    position: absolute;
+    left: 23%;
+    top: 6px;
+}
+
+input {
+    background: none;
+    border: none;
+    outline: none;
+    width: 500px;
+    height: 30px;
+    font-size:22px;
+}
+
+#mapoperate {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: auto;
+    border: 1px solid #707070;
+    z-index: 999;
+    border-radius: 5px;
+}
+
+#mapoperate ul li {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-bottom: 1px solid #707070;
+}
+
+#mapoperate ul li:last-child {
+    border-bottom: none;
+}
+
+#mapoperate ul li img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#legend {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 5px;
+    height: auto;
+    border: 1px solid #707070;
+    padding: 5px;
+}
+
+#legend .legendleft {
+    display: inline-block;
+}
+
+#legend .legendleft .one {
+    color: #BEBEBE;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background-color: #BEBEBE;
+    vertical-align: middle;
+    margin: 0 20px;
+}
+
+#legend .legendleft .two {
+    color: #FFD832;
+}
+
+#legend .legendleft .three {
+    color: #FFD898;
+}
+
+#legend .legendleft .four {
+    color: #B2FFFF;
+}
+
+#legend .legendleft .five {
+    color: #FF0000;
+}
+
+#legend .legendleft .six {
+    color: #0000FF;
+}
+
+#legend .legendleft .seven {
+    color: #99FF7F;
+}
+
+#legend .legendleft .eight {
+    color: #BEBEBE;
+}
+
+#legend .legendleft .nine {
+    color: #BEBEBE;
+}
+
+#legend .legendleft .ten {
+    color: #000000;
+}
+
+#legend .legendright {
+    display: inline-block;
+    padding-left: 5px;
+}
+
+#legend ul li {
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+}
+
+#legend ul li img {
+    width: 30px;
+    height: auto;
+}
+
+#operate {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+}
+
+.hotshow {
+    display: block;
+}
+
+.hothide {
+    display: none;
+}
+
+.leaflet-control-container {
+    display: none !important;
+}
+
+#menu li {
+    height: 35px;
+    line-height: 35px;
+}
+
+#menu li img {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+#menuitem {
+    display: none;
+    color: #FFFFFF;
+    padding: 30px;
+}
+
+#menuitem li:first-child {
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+}
+
+#menuitem li:last-child {
+    border-radius: 0 0 5px 5px;
+}
+
+#menuitem li {
+    border: 2px solid #707070;
+    line-height: 40px;
+    height: 40px;
+    cursor: pointer;
+    padding: 0 25px;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.5;
+    letter-spacing: 2px;
+}
+
+#menuitem li:hover {
+    color: #00ff01;
+}
+
+#screen {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border: 1px solid #707070;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    z-index: 9999;
+    margin-bottom: 0;
+    border-radius: 5px;
+}
+
+#screen ul {
+    display: inline-block;
+}
+
+.my-div-icon {
+    font-size: 9px;
+    color: #0b0b0b;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+.my-div-icon-name {
+    font-size: 4px;
+    color: #707070;
+    opacity: 0.4;
+    width: 80px !important;
+    margin-left: -40px !important;
+    margin-top: -15px !important;
+    text-align: center;
+}
+
+/*.my-div-icon-namepoint {*/
+/*	color: #0b0b0b;*/
+/*	font-size: 50px;*/
+/*	position: absolute;*/
+/*	top: -25px;*/
+/*}*/
+.my-div-city-name {
+    color: #BEBEBE;
+    font-size: 15px;
+    position: absolute;
+    top: -15px;
+    width: 100px !important;
+    text-align: center;
+}
+
+.my-div-county-name {
+    color: #CECECE;
+    font-size: 12px;
+    position: absolute;
+    top: 0px;
+    width: 60px !important;
+    text-align: left;
+}
+
+.easyPrintHolder .a3CssClass {
+    background-image: url(data:image/svg+xml;utf8;base64,PD9...go=);
+}
+
+
+.map-name15 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 140px !important;
+    font-size: 9px;
+    top: -10px;
+    left: -50px;
+    display: none;
+}
+
+.map-name16 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 280px !important;
+    font-size: 13px;
+    top: -20px;
+    left: -101px;
+}
+
+.map-name17 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 520px !important;
+    top: -50px;
+    left: -199px;
+    font-size: 26px;
+}
+
+.map-name18 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 1032px !important;
+    top: -120px;
+    left: -403px;
+    font-size: 51px;
+}
+
+.map-name19 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 2080px !important;
+    top: -285px;
+    left: -844px;
+    font-size: 104px;
+}
+
+.map-name20 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 4160px !important;
+    top: -570px;
+    left: -1688px;
+    font-size: 208px;
+}
+
+.map-name21 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 8320px !important;
+    top: -1140px;
+    left: -3267px;
+    font-size: 416px;
+}
+
+
+.map-scale15 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 140px !important;
+    font-size: 9px;
+    top: -10px;
+    left: -50px;
+    display: none;
+}
+
+.map-scale16 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 280px !important;
+    font-size: 12px;
+    top: -4px;
+    left: -94px;
+}
+
+.map-scale17 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 564px !important;
+    top: -10px;
+    left: -200px;
+    font-size: 16px;
+}
+
+.map-scale18 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 1032px !important;
+    top: -44px;
+    left: -373px;
+    font-size: 43px;
+}
+
+.map-scale19 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 2080px !important;
+    top: -90px;
+    left: -765px;
+    font-size: 80px;
+}
+
+.map-scale20 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 4160px !important;
+    top: -208px;
+    left: -1547px;
+    font-size: 175px;
+}
+
+.map-scale21 {
+    color: #000000;
+    position: absolute;
+    text-align: left;
+    width: 8320px !important;
+    top: -440px;
+    left: -3101px;
+    font-size: 340px;
+}
