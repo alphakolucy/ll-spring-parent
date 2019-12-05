@@ -77,18 +77,23 @@
 
 <div id="screen" class="layui-form layui-form-item">
     <ul class="layers">
-        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="layersall" name="layersall" title="全部"
-                   checked="true"/></li>
-        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="structure" name="structure" title="构造分区"/>
-        </li>
-        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="fault" name="fault" title="断层"/></li>
-        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="residential" name="residential"
-                   title="乡镇"/></li>
-        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="rivers" name="rivers" title="河流"/></li>
-        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="traffic" name="traffic" title="交通"
-                   checked="true"/></li>
-        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="highspeed" name="highspeed" title="高速路"
-                   checked="true"/></li>
+        <!-- <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="layersall" name="layersall" title="全部图层" checked="true"/></li> -->
+        <li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="mapstructure" name="mapstructure"
+                   title="图框" checked="true" /></li>
+        <li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="mapname" name="mapname"
+                   title="图名" checked="true" /></li>
+        <li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="provice" name="provice"
+                   title="省界" checked="true" /></li>
+        <li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="city" name="city" title="市界"
+                   checked="true" /></li>
+        <li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="country" name="country"
+                   title="县界" checked="true" /></li>
+        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="traffic" name="traffic" title="交通图层" checked="true" /></li>
+        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="structure" name="structure" title="构造图层" /></li>
+        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="structure1" name="structure1" title="褶皱图层" /></li>
+        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="fault" name="fault" title="断层图层" /></li>
+        <!-- <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="residential" name="residential" title="乡镇图层"/></li> -->
+        <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="rivers" name="rivers" title="河流图层" /></li>
     </ul>
     <ul class="water-quality">
         <li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="waterqualityall"
