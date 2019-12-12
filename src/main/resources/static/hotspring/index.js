@@ -129,7 +129,7 @@ addmapname();
 
 function readdpoint(lat, lng, properties) {
 	var relat = lat / pointrotiox;
-	var relng = lng / pointrotioy;
+	var relng = (lng-18000000) / pointrotioy;
 	var geojsonMarkerOptions = {
 		radius: 1,
 		fillColor: "#ff7800",

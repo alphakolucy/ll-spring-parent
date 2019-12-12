@@ -326,42 +326,40 @@ public class SpringPointController implements SpringPointControllerApi {
             System.out.println(ob);
             if (!ob.toString().isEmpty()) {
                 try {
-
-
                     SpringPointInfo springPointInfo = new SpringPointInfo();
                     String s = ob.toString();
                     String substring = s.substring(1, s.length() - 1);
                     String[] obArr = substring.split(",");
-                    springPointInfo.setCodeNumber(obArr[1]);
-                    springPointInfo.setAddress(obArr[2]);
-                    springPointInfo.setX(Double.parseDouble(obArr[3]));
-                    springPointInfo.setY(Double.parseDouble(obArr[4]));
+                    springPointInfo.setCodeNumber(obArr[0]!=null?obArr[0].trim():"");
+                    springPointInfo.setAddress(obArr[1]!=null?obArr[1].trim():"");
+                    springPointInfo.setX(obArr[2]!=null?Double.parseDouble(obArr[2]):0);
+                    springPointInfo.setY(obArr[3]!=null?Double.parseDouble(obArr[3]):0);
                     //根据需求  X Y 各除500 对调存入realX realY   数组顺序查询Api.js的pointtabletitles
-                    springPointInfo.setRealX(Double.parseDouble(obArr[4]) / 500);
-                    springPointInfo.setRealY(Double.parseDouble(obArr[3]) / 500);
-                    springPointInfo.setZ(Double.parseDouble(obArr[5]));
-                    springPointInfo.setWaterInflow(obArr[6]);
-                    springPointInfo.setPh(obArr[7]);
-                    springPointInfo.setTrepanning(obArr[8]);
-                    springPointInfo.setWaterOutlet(obArr[9]);
-                    springPointInfo.setHoleDepth(Double.parseDouble(obArr[10]));
-                    springPointInfo.setHydrochemicalType(obArr[11]);
-                    springPointInfo.setReservoirUnit(obArr[12]);
-                    springPointInfo.setStatus(obArr[13]);
-                    springPointInfo.setWaterTemperature(Double.parseDouble(obArr[14]));
-                    springPointInfo.setDissolvedSolids(Double.parseDouble(obArr[15]));
-                    springPointInfo.setCo2(Double.parseDouble(obArr[16]));
-                    springPointInfo.setHydrothion(Double.parseDouble(obArr[17]));
-                    springPointInfo.setHsio(Double.parseDouble(obArr[18]));
-                    springPointInfo.setHbo2(Double.parseDouble(obArr[19]));
-                    springPointInfo.setBr2(Double.parseDouble(obArr[20]));
-                    springPointInfo.setI2(Double.parseDouble(obArr[21]));
-                    springPointInfo.setFe(Double.parseDouble(obArr[22]));
-                    springPointInfo.setAsa(Double.parseDouble(obArr[23]));
-                    springPointInfo.setRn(Double.parseDouble(obArr[24]));
-                    springPointInfo.setEpidemiologicalSurvey(obArr[25]);
-                    springPointInfo.setEfficacyInterventionExperiment(obArr[26]);
-                    springPointInfo.setGeneticDissection(obArr[27]);
+                    springPointInfo.setRealX(obArr[2]!=null?Double.parseDouble(obArr[2]) / 500:0);
+                    springPointInfo.setRealY(obArr[3]!=null?Double.parseDouble(obArr[3]) / 500:0);
+                    springPointInfo.setZ(obArr[4]!=null?Double.parseDouble(obArr[4]):0);
+                    springPointInfo.setWaterInflow(obArr[5]!=null?obArr[5].trim():"");
+                    springPointInfo.setPh(obArr[6]!=null?obArr[6].trim():"");
+                    springPointInfo.setTrepanning(obArr[7]!=null?obArr[7].trim():"");
+                    springPointInfo.setWaterOutlet(obArr[8]!=null?obArr[8].trim():"");
+                    springPointInfo.setHoleDepth(obArr[9]!=null?Double.parseDouble(obArr[9]):0);
+                    springPointInfo.setHydrochemicalType(obArr[10]!=null?obArr[10].trim():"");
+                    springPointInfo.setReservoirUnit(obArr[11]!=null?obArr[11].trim():"");
+                    springPointInfo.setStatus(obArr[12]!=null?obArr[12].trim():"");
+                    springPointInfo.setWaterTemperature(obArr[13]!=null?Double.parseDouble(obArr[13]):0);
+                    springPointInfo.setDissolvedSolids(obArr[14]!=null?Double.parseDouble(obArr[14]):0);
+                    springPointInfo.setCo2(obArr[15]!=null?Double.parseDouble(obArr[15]):0);
+                    springPointInfo.setHydrothion(obArr[16]!=null?Double.parseDouble(obArr[16]):0);
+                    springPointInfo.setHsio(obArr[17]!=null?Double.parseDouble(obArr[17]):0);
+                    springPointInfo.setHbo2(obArr[18]!=null?Double.parseDouble(obArr[18]):0);
+                    springPointInfo.setBr2(obArr[19]!=null?Double.parseDouble(obArr[19]):0);
+                    springPointInfo.setI2(obArr[20]!=null?Double.parseDouble(obArr[20]):0);
+                    springPointInfo.setFe(obArr[21]!=null?Double.parseDouble(obArr[21]):0);
+                    springPointInfo.setAsa(obArr[22]!=null?Double.parseDouble(obArr[22]):0);
+                    springPointInfo.setRn(obArr[23]!=null?Double.parseDouble(obArr[23]):0);
+                    springPointInfo.setEpidemiologicalSurvey(obArr[24]!=null?obArr[24].trim():"");
+                    springPointInfo.setEfficacyInterventionExperiment(obArr[25]!=null?obArr[25].trim():"");
+                    springPointInfo.setGeneticDissection(obArr[26]!=null?obArr[26].trim():"");
 
                     //校验温泉点类型
                     //存入类型

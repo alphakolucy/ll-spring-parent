@@ -14,11 +14,9 @@ public class PointCategoryUtil {
     public SpringPointInfo selectPointCategory(SpringPointInfo springPointInfo, boolean b) {
 
         String codeNumber = springPointInfo.getCodeNumber();
-
-
 //        String substring = codeNumber.substring(0, 1);
 
-
+        codeNumber = codeNumber.trim();
 
         if (codeNumber.contains("S") || codeNumber.contains("s")) {
             if (b) {
@@ -87,13 +85,18 @@ public class PointCategoryUtil {
     public SpringPointInfo getPointCategory(SpringPointInfo springPointInfo, SpringPointRepository springPointRepository, SpringTypeService springTypeService){
         SpringPointInfo entity = new SpringPointInfo();
         //判断温泉是否达标(
-        springPointRepository.save(springPointInfo);
+        Double waterTemperature =36.0;
+        String statu= "正常";
+//        springPointRepository.save(springPointInfo);
         String pointStatus = springPointInfo.getStatus();
+        Double waterTemperature1 = springPointInfo.getWaterTemperature();
+        boolean equals = statu.equals(pointStatus);
+        boolean equals1 =waterTemperature1>= waterTemperature;
         //温度大于等于36°进行判断  否则为不达标
-        if (springPointInfo.getWaterTemperature() >= 36&&"正常".equals(pointStatus)) {
+        if (waterTemperature1>= waterTemperature && statu.equals(pointStatus)) {
             boolean b = springTypeService.saveType(springPointInfo);
             return selectPointCategory(springPointInfo, b);
-        } else if (PointCategory.WZL.getTxt().equals(pointStatus)||PointCategory.FQ.getTxt().equals(pointStatus)){
+        } else if (PointCategory.WZL.getTxt().equals(pointStatus)|| PointCategory.FQ.getTxt().equals(pointStatus)){
             Integer  pointCategory=PointCategory.WZL.getTxt().equals(pointStatus)? PointCategory.WZL.getValue():PointCategory.FQ.getValue();
             springPointInfo.setPointCategory(pointCategory);
             springTypeService.saveType(springPointInfo);
