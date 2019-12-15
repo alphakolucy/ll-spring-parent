@@ -436,7 +436,7 @@
                     </div>
                     <div class="layui-col-md4">
                         <div class="layui-form-item">
-                            <label class="layui-form-label"><sup>222</sup>Rn(Bg/L)</label>
+                            <label class="layui-form-label"><sup>222</sup>Rn(q/L)</label>
                             <div class="layui-input-block">
                                 <input type="text" name="rn" required lay-verify="required" placeholder="请输入" value="0" autocomplete="off"
                                        class="layui-input">
@@ -648,14 +648,14 @@
 <script type="text/javascript" src="../Api.js"></script>
 <script type="text/javascript" src="../layui/layui.js"></script>
 <script type="text/javascript">
-    var curpointdata = parent.curpointjson;
+    var curpointdata = parent.curpointjson;//获取数据类别传递的当前温泉点数据
     layui.use(['upload', 'element', 'form', 'jquery', 'table'], function() {
         var upload = layui.upload;
         var element = layui.element;
         var form = layui.form;
         var $ = layui.jquery;
         var table = layui.table;
-        //获取数据接口
+        //获取所有的input对数据进行赋值，并添加符合条件的数据变为红色
         var inputs = $("form").find("input");
         $.each(inputs, function(index, item) {
             var attrname = $(this).attr("name");
@@ -683,8 +683,8 @@
             //遍历得到的每一个jquery对象
         });
         form.render();
-        $("#reservoirUnit").val(curpointdata.reservoirUnit);
-        $("#status").val(curpointdata.status);
+        $("#reservoirUnit").val(curpointdata.reservoirUnit);//下拉选择框赋值
+        $("#status").val(curpointdata.status);//下拉选择框赋值
 
         form.render("select");
 
@@ -709,16 +709,16 @@
             }
         }
 
-        //监听
+        //图片文件操作菜单
         table.on('tool(imagedemo)', function(obj) {
             var data = obj.data;
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-            if (obj.event === 'down') {
+            if (obj.event === 'down') {//下载
                 var a = document.createElement('a');
                 a.setAttribute('href', data.url);
                 a.setAttribute('target', '_blank');
                 a.click();
-            } else if (obj.event === 'detail') {
+            } else if (obj.event === 'detail') {//图片查看
                 var imgHtml = "<div style='text-align:center'><img src='" + data.url + "' /></div>";
                 //弹出层
                 var imglayer = layer.open({
@@ -735,7 +735,7 @@
                     }
                 });
                 layer.full(imglayer);
-            } else if (obj.event === 'del') {
+            } else if (obj.event === 'del') {//删除
                 layer.confirm('真的删除行么', function(index) {
                     layer.close(index);
                     $.ajax({
@@ -768,7 +768,7 @@
         });
 
 
-        //监听提交
+        //数据编辑保存
         form.on('submit(formDemo)', function(data) {
             var fromdata = data.field;
             //添加温泉点
@@ -803,6 +803,7 @@
             [],
             []
         ];
+        //数据类型切换函数
         element.on('tab(pointtabs)', function(elem) {
             switch (elem.index) {
                 case 0:
@@ -875,10 +876,12 @@
             "id": "#model",
             "picState": 10005
         }];
+        //根据图片数据类型获取已上传的图片数据并渲染成列表显示
         $.each(picStates, function(index, item) {
+            //获取上传的图片数据
             $.ajax({
                 type: "GET",
-                url: apiUrl + "/springPoint/findPicFileHistory",
+                url: apiUrl + "/springPoint/findPicFileHistory",//数据接口
                 dataType: "json",
                 data: {
                     "pointId": curpointdata.id,
@@ -888,6 +891,7 @@
                     if (data.code == 200) {
                         if (index==3||index ==4) {
                             imagelist[index] = data.springPicFileList;
+                            //表格对象渲染
                             table.render({
                                 elem: '#list' + index,
                                 id: 'pointlist' + index,
@@ -984,6 +988,7 @@
                     // }, function() {});
                 }
             });
+            //图片上传对象渲染
             upload.render({
                 elem: item.id,
                 url: apiUrl + '/upload/image',
@@ -999,6 +1004,7 @@
                 acceptMime: 'image/*',
                 size: 20480,
                 choose: function(obj) {
+                    //图片上传之前的判断
                     console.log($(item.id + "plottingScale").val());
                     var scaleval = $(item.id + "plottingScale").val().replace(/(^\s*)|(\s*$)/g, ''); //去除空格;;
                     if (item.picState==10004||item.picState==10005){
@@ -1025,6 +1031,7 @@
                     layer.load();
                 },
                 done: function(res) {
+                    //图片上传成功处理
                     layer.closeAll('loading');
                     if (res.hasOwnProperty("springPicFile")) {
                         layer.msg('图片上传成功', {
@@ -1058,16 +1065,16 @@
             });
         })
 
-        //监听工具条
+        //图片操作菜单
         table.on('tool(imagedemo)', function(obj) {
             var data = obj.data;
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-            if (obj.event === 'down') {
+            if (obj.event === 'down') {//下载
                 var a = document.createElement('a');
                 a.setAttribute('href', data.url);
                 a.setAttribute('target', '_blank');
                 a.click();
-            } else if (obj.event === 'detail') {
+            } else if (obj.event === 'detail') {//图片详情
                 var imgHtml = "<div style='text-align:center'><img src='" + data.url + "' /></div>";
                 //弹出层
                 var imglayer = layer.open({
@@ -1115,7 +1122,7 @@
                 });
             }
         });
-
+//附件类型文件操作菜单
         table.on('tool(demo)', function(obj) {
             var data = obj.data;
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
@@ -1172,6 +1179,7 @@
                 });
             }
         });
+        //理疗功效研究类型文件操作菜单
         table.on('tool(demo1)', function(obj) {
             var data = obj.data;
             var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
@@ -1242,7 +1250,7 @@
             []
         ];
         var packagetype1 = 6;
-        //切换附件类型
+        //附件类型切换上传附件文件类型
         $("#filetype ul li").on("click", function() {
             if ($(this).hasClass('active')) {
                 return false;
@@ -1257,7 +1265,7 @@
             }
 
         });
-        //切换附件类型
+        //理疗功效研究类型切换附件文件类型
         $("#filetype1 ul li").on("click", function() {
             if ($(this).hasClass('active')) {
                 return false;
@@ -1276,6 +1284,7 @@
         });
         var packagetypes = [0, 1, 2, 3, 4, 5];
         var packagetypes1 = [6, 7];
+        //获取附件类型已上传文件并渲染显示，实例化附件上传对象
         $.each(packagetypes, function(index, item) {
             $.ajax({
                 type: "GET",
@@ -1330,6 +1339,7 @@
                 }
             });
         });
+        //获取理疗功效研究类型已上传文件并渲染显示，实例化附件上传对象
         $.each(packagetypes1, function(index, item) {
             $.ajax({
                 type: "GET",

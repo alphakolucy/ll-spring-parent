@@ -9,16 +9,25 @@ import com.booledata.llspringparent.utils.EmptyUtil;
 * @date 2019/10/15
 **/
 public enum PointCategory {
-    //天然温泉，地热井
+    //天然温泉，地热井状态
+    // 关键字：pointCategory
     S(30001, "天然温泉"),
-    DR(30002, "地热井"),
-    SGZRKSZK(30003,"施工中热矿水钻孔"),
+    SBDB(-30002, "不达标温泉"),
+    SWZL(-30003, "无资料温泉"),
+    SFQ(-30004, "废弃温泉"),
+    DR(30005, "地热井"),
+    DRSGZ(30006, "施工中地热井"),
+    DRBDB(-30007, "不达标地热"),
+    DRFQ(-30008, "废弃地热井"),
+    DRWZL(-30009, "无资料地热井"),
+    //理疗指标状态
+    //关键字； llStatus
+    LLGXYJD(30010,"理疗功效研究点"),
+    SGZRKSZK(30011,"成因解剖研究点"),
+    //只需要显示 不需要图例
+    BOTHLLCY(30012,"理疗功效成因解刨"),
+    NCANCEL(-30012,"录入编号异常");
 
-    SCANCEL(-30001,"不达标温泉"),
-    DRCANCEL(-30002,"不达标地热"),
-    NCANCEL(-30003,"其他"),
-    WZL(-30004,"无资料"),
-    FQ(-30005,"废弃");
 
     private Integer value;
     private String txt;

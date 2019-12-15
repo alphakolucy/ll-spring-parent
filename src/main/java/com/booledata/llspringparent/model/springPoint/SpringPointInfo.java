@@ -93,19 +93,19 @@ public class SpringPointInfo implements Serializable {
     @Column(nullable = false, length = 20)
     private Double holeDepth;
     //ph值
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 255)
     private String ph;
     //水温
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 255)
     private Double waterTemperature;
     //涌水量
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 255)
     private String waterInflow;
     //开孔/出露层位
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 255)
     private String trepanning;
     //出水段
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 255)
     private String waterOutlet;
     //溶解性总固体
     @Column(nullable = false, length = 20)
@@ -142,7 +142,7 @@ public class SpringPointInfo implements Serializable {
     private String hydrochemicalType;
 
     //热储单元
-    @Column(nullable = false,length = 11)
+    @Column(nullable = false,length = 255)
     private String reservoirUnit;
 
 
@@ -153,23 +153,26 @@ public class SpringPointInfo implements Serializable {
      * 无资料（黄色）
      * 废弃（黑色）
      */
-    @Column(nullable = false,length = 11)
+    @Column(nullable = false,length = 255)
     private String status;
 
+    @Column(length = 10)
+    private Integer llStatus;
+    
     //温泉点类型：理疗温泉  地热井
     @Column( length = 10)
     private Integer pointCategory;
 
     //温泉地区流行病学调查
-    @Column(nullable = false,length = 11)
+    @Column(nullable = false,length = 255)
     private String epidemiologicalSurvey;
 
     //温泉理疗功效干预实验
-    @Column(nullable = false,length = 11)
+    @Column(nullable = false,length = 255)
     private String efficacyInterventionExperiment;
 
     //理疗温泉成因解剖
-    @Column(nullable = false,length = 11)
+    @Column(nullable = false,length = 255)
     private String geneticDissection;
 
 //    public Double getRealX() {

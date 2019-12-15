@@ -8,15 +8,15 @@
 	<body>
 		<div class="layui-form" style="padding: 10px 0 0 10px;">
 			<div class="layui-inline">
-				<select name="selectfilter" lay-verify="" lay-filter="selectfilter">
-					<option value="codeNumber" selected>编号</option>
-					<option value="address">地址</option>
-				</select>
+				<!-- 选择查询字段 -->
+				<div class="layui-input-block" id="tag_ids2"></div>
 			</div>
+			<!-- 输入查询条件及查询 -->
 			<div class="layui-inline"><input class="layui-input" style="width: 250px;display: inline-block;" id="searchvaladress"
-				 placeholder="请输入地址关键字" />
+				 placeholder="请输入关键字" />
 				<button class="layui-btn" style="width: 100px;" id="searchaddress">查询</button>
 			</div>
+			<!-- 数据操作菜单 -->
 			<div class="layui-inline">
 				<button class="layui-btn" style="width: 100px;" id="import">导入</button>
 				<button class="layui-btn" style="width: 100px;" id="export">导出</button>
@@ -24,55 +24,122 @@
 			</div>
 		</div>
 		<div>
+			<!-- 温泉点数据列表显示容器 -->
 			<table class="layui-hide" id="list" lay-data="{id: 'pointlist'}" lay-filter="demo"></table>
 		</div>
 		<script type="text/javascript" src="../Api.js"></script>
 		<script type="text/javascript" src="../layui/layui.js"></script>
 		<script type="text/javascript">
 			var curpointjson = {};
-
-			layui.use(['table', 'form', 'jquery', 'layer','upload'], function() {
+			layui.config({
+				base: '../'
+			}).extend({
+				selectN: 'layui_extends/selectN', //下拉多选多选插件 
+				selectM: 'layui_extends/selectM', //下拉多选多选插件 https://fly.layui.com/extend/selectN,selectM/#doc
+			}).use(['table', 'form', 'jquery', 'upload','selectN', 'selectM'], function() {
 				var table = layui.table;
 				var form = layui.form;
 				var $ = layui.jquery;
 				var layer = layui.layer;
 				var upload = layui.upload;
-				var searchfilter = "codeNumber";
-				var curtabledata=[];
-
-				//查询
+				var searchfilter = {};
+				var curtabledata = [];
+				var selectN = layui.selectN;
+				var selectM = layui.selectM;
+				var tagIns2 = selectM({
+					//元素容器【必填】
+					elem: '#tag_ids2',
+					data: waterstanardsearch,
+					selected: [],
+					max: waterstanardsearch.length,
+					name: 'tag2',
+					delimiter: ',',
+					field: {
+						idName: 'id',
+						titleName: 'name'
+					}
+				});
+				//查询函数
 				$("#searchaddress").on("click", function() {
 					var searchval = $("#searchvaladress").val();
-					table.reload('pointlist', {
-						where: {
-							[searchfilter]: searchval,
-						},
-						page: {
-							curr: 1
+					if(searchval==""){
+						table.reload('pointlist', {
+							page: {
+								curr: 1
+							}
+						});
+					}else{
+						searchfilter={};
+						//获取选择的字段值
+						var fifterval=$("input[name=tag2]").val();
+						console.log(fifterval);
+						if(fifterval==""){
+							layer.msg('查询字段不能为空！', {
+								icon: 5,
+								time: 1000
+							}, function() {
+							});
+							return false;
+						}else{
+							var fiftervals=fifterval.split(',');
+							$.each(fiftervals,function(index,item){
+								searchfilter[item]=searchval;
+							});
+							table.reload('pointlist', {
+								where:searchfilter,
+								page: {
+									curr: 1
+								}
+							});
 						}
-					});
+					}
 				});
 				//导出所有
 				$("#exportall").on("click", function() {
-					parent.exportdata();
+					//获取选择的字段值
+					searchfilter={};
+					var searchval = $("#searchvaladress").val();
+					var fifterval=$("input[name=tag2]").val();
+					if(fifterval!=""){
+						var fiftervals=fifterval.split(',');
+						$.each(fiftervals,function(index,item){
+							searchfilter[item]=searchval;
+						});
+					}
+					$.ajax({
+						type: "GET",
+						url: apiUrl + "/springPoint/findAllPage",
+						data:searchfilter,
+						dataType: "json",
+						success: function(data) {
+							tableToExcel(pointtabletitles, data.springPoints.content);
+						},
+						error:function(data) {
+							layer.msg('查询数据失败！', {
+								icon: 5,
+								time: 1000
+							}, function() {
+							
+							});
+						}
+					});
 				});
 				//导出当前
 				$("#export").on("click", function() {
-
 					console.log(curtabledata);
-					if(curtabledata.length==0){
+					if (curtabledata.length == 0) {
 						layer.msg('数据为空，导出失败！', {
 							icon: 5,
 							time: 1000
 						}, function() {
-						
+
 						});
-					}else{
+					} else {
 						tableToExcel(pointtabletitles, curtabledata);
 					}
 				});
-				
-				//导入
+
+				//导入数据
 				var uploadfiles = upload.render({
 					elem: "#import",
 					url: apiUrl + '/springPoint/importToSave',
@@ -91,15 +158,15 @@
 							icon: 1,
 							time: 1000
 						}, function() {
-                            table.reload('pointlist', {
-                                where: {
-                                    [searchfilter]: "",
-                                },
-                                page: {
-                                    curr: 1
-                                }
-                            });
-                        });
+							table.reload('pointlist', {
+								where: {
+									[searchfilter]: "",
+								},
+								page: {
+									curr: 1
+								}
+							});
+						});
 						parent.getpointlist();
 					},
 					error: function() {
@@ -120,13 +187,13 @@
 					// console.log(data.othis); //得到美化后的DOM对象
 				});
 
-
+				//实例化数据类别显示对象
 				table.render({
 					elem: '#list',
 					id: 'pointlist',
 					// limit: 3,
 					// limits: [3, 6, 9, 12],
-					url: apiUrl + "/springPoint/findAllPage",
+					url: apiUrl + "/springPoint/findAllPage", //数据获取接口
 					request: {
 						pageName: 'page',
 						limitName: 'size'
@@ -168,7 +235,7 @@
 								title: 'PH值',
 							}, {
 								field: 'waterTemperature',
-								title: '水温'
+								title: '温度'
 							}, {
 								field: 'waterInflow',
 								title: '涌水量'
@@ -181,24 +248,34 @@
 							},
 							{
 								field: 'pointCategory',
-								title: '温泉点类型',
+								title: '理疗类型',
 								templet: function(d) {
 									if (d.pointCategory == 30001) {
 										return "天然温泉";
-									} else if (d.pointCategory == 30002) {
-										return "地热井";
-									} else if (d.pointCategory == 30003) {
-										return "施工中热矿水转孔";
-									} else if (d.pointCategory == -30001) {
+									}else if (d.pointCategory == -30002) {
 										return "不达标温泉";
-									} else if (d.pointCategory == -30002) {
-										return "不达标地热";
-									} else if (d.pointCategory == -30004) {
-										return "无资料";
-									} else if (d.pointCategory == -30005) {
-										return "废弃";
-									} else {
-										return "未分类";
+									} else if (d.pointCategory == -30003) {
+										return "无资料温泉";
+									}else if (d.pointCategory == -30004) {
+										return "废弃温泉";
+									}else if (d.pointCategory == 30005) {
+										return "地热井";
+									}else if (d.pointCategory == 30006) {
+										return "施工中地热井";
+									}else if (d.pointCategory == -30007) {
+										return "不达标地热井";
+									}else if (d.pointCategory == -30008) {
+										return "废弃地热井";
+									}else if (d.pointCategory == -30009) {
+										return "无资料地热井";
+									}else if (d.llStatus == 30010) {
+										return "理疗功效研究点";
+									}else if (d.llStatus == 30011) {
+										return "成因解剖研究点";
+									}else if (d.llStatus == 30012) {
+										return "理疗功效成因解剖研究点";
+									}else if (d.pointCategory == -30012) {
+										return "录入编号异常";
 									}
 								}
 							},
@@ -210,18 +287,18 @@
 						]
 					],
 					page: true,
-					done: function(res, curr, count){
-					    //如果是异步请求数据方式，res即为你接口返回的信息。
-						console.log("data:"+res.data);
-						curtabledata=res.data;
-						console.log('查询结果数：'+curtabledata);
-					  }
+					done: function(res, curr, count) {
+						//如果是异步请求数据方式，res即为你接口返回的信息。
+						console.log("data:" + res.data);
+						curtabledata = res.data;
+						console.log('查询结果数：' + curtabledata);
+					}
 				});
-				//监听工具条
+				//数据操作菜单函数
 				table.on('tool(demo)', function(obj) {
 					var data = obj.data;
 					curpointjson = data;
-					if (obj.event === 'detail') {
+					if (obj.event === 'detail') { //详情查看
 						layer.open({
 							type: 2,
 							title: "温泉点详情",
@@ -229,7 +306,7 @@
 							shadeClose: true, //点击遮罩关闭
 							content: 'pointdetail.html'
 						});
-					} else if (obj.event === 'del') {
+					} else if (obj.event === 'del') { //数据删除
 						layer.confirm('真的删除行么', function(index) {
 							layer.close(index);
 							$.ajax({
@@ -255,28 +332,26 @@
 								}
 							});
 						});
-					} else if (obj.event === 'edit') {
+					} else if (obj.event === 'edit') { //数据编辑
 						layer.open({
 							type: 2,
 							title: "编辑温泉点",
 							area: ['80%', '90%'],
 							shadeClose: true, //点击遮罩关闭
 							content: 'pointmodify.html',
-                            end:function(){
-                                table.reload('pointlist', {
-                                    where: {
-                                        [searchfilter]: "",
-                                    },
-                                    page: {
-                                        curr: 1
-                                    }
-                                });
-                            }
+							end: function() {
+								table.reload('pointlist', {
+									page: {
+										curr: 1
+									}
+								});
+							}
 						});
 					}
 				});
 			});
 		</script>
+		<!-- 数据操作菜单 -->
 		<script type="text/html" id="barDemo">
 			<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 		  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>

@@ -2,70 +2,78 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>贵州省理疗温泉调查</title>
+		<title>贵州省理疗温泉数据管理</title>
 		<link rel="stylesheet" href="layui/css/layui.css" media="all">
 		<link rel="stylesheet" href="leaflet/leaflet.css" />
 		<link rel="stylesheet" href="index.css" />
 
 	</head>
 	<body>
+		<!-- 地图显示容器 -->
 		<div id="map"></div>
-
+		<!-- 温泉数据录入、数据列表查看操作 -->
 		<div id="operate">
-			<ul id="menu">
-				<li><img id="clickmenu" src="img/menu.svg" /></li>
-			</ul>
 			<ul id="menuitem">
-				<li id="searchpoint">温泉点列表</li>
-				<li id="springPoint">基础数据录入</li>
-				<!--                <li id="springPicHis">温泉点图片历史</li>-->
+				<li name="hotlistall">贵州省温泉统计表</li>
+				<li name="hotlistanatomy">典型理疗温泉成因解剖研究</li>
+				<li name="hotlisteffect">典型理疗温泉成因功效研究</li>
 			</ul>
 		</div>
-
+		<!-- 地图基本操作 -->
 		<div id="mapoperate">
 			<ul>
-				<li><img src="img/back.svg" onclick="func_map(0)" title="复位" /></li>
-				<li><img src="img/add.svg" onclick="func_map(1)" title="放大" /></li>
-				<li><img src="img/sub.svg" onclick="func_map(2)" title="缩小" /></li>
-				<li><img src="img/imgexport.png" onclick="func_map(3)" title="导出地图" /></li>
+				<li name="reset"><img src="img/back.svg" title="复位" /></li>
+				<li name="add"><img src="img/add.svg" title="放大" /></li>
+				<li name="sub"><img src="img/sub.svg" title="缩小" /></li>
+				<li name="export"><img src="img/imgexport.png" title="导出地图" /></li>
+				<li name="manage"><img src="img/manage.svg" title="数据添加" /></li>
 			</ul>
 		</div>
-
+		<!-- 地图标题 -->
+		<div id="biaoti">
+			<input type="text" name="" value="贵州省理疗温泉分布图">
+		</div>
+		<!-- 地图图例显示模块 -->
+		<div id="showlegend" title="显示图例"><img src="img/show.svg" /></div>
 		<div id="legend">
-			<ul class="layers">
-				<!-- <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="layersall" name="layersall" title="全部图层" checked="true"/></li> -->
-				<li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="mapstructure" name="mapstructure"
-					 title="图框" checked="true" /></li>
-				<li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="mapname" name="mapname"
-					 title="图名" checked="true" /></li>
-				<li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="provice" name="provice"
-					 title="省界" checked="true" /></li>
-				<li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="city" name="city" title="市界"
-					 checked="true" /></li>
-				<li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="country" name="country"
-					 title="县界" checked="true" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="traffic" name="traffic" title="交通图层" checked="true" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="structure" name="structure" title="构造图层" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="structure1" name="structure1" title="褶皱图层" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="fault" name="fault" title="断层图层" /></li>
-				<!-- <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="residential" name="residential" title="乡镇图层"/></li> -->
-				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="rivers" name="rivers" title="河流图层" /></li>
+			<!-- 地图图层图例 -->
+			<ul class="legendleft">
+				<li><span class="one"></span> <span>乡镇</span></li>
+				<li><span class="eight">————</span> <span>省市县</span></li>
+				<li><span class="nine">————</span> <span>图框</span></li>
+				<li><span class="ten">————</span> <span>图名</span></li>
+				<li name="traffic" class="hotshow"><span class="two">————</span> <span>高速路</span></li>
+				<li name="traffic" class="hotshow"><span class="three">————</span> <span>交通</span></li>
+				<li name="rivers" class="hothide"><span class="four"><img src="img/river.png" /></span> <span>河流</span></li>
+				<li name="fault" class="hothide"><span class="five" style="font-size: 18px;">————</span> <span>活性断层</span></li>
+				<li name="fault" class="hothide"><span class="five">————</span> <span>一般断层</span></li>
+				<li name="structure" class="hothide"><span class="six">————</span> <span>构造分区</span></li>
+				<li name="structure1" class="hothide"><span class="seven" style="color: #99FF7F;">————</span> <span>向斜</span>
+				</li>
+				<li name="structure1" class="hothide"><span class="seven" style="color: #53B554;">————</span> <span>背斜</span>
+				</li>
 			</ul>
+			<!-- 温泉数据图例 -->
 			<ul class="legendright">
-				<li><img src="img/lanhotwell.png" /><span>地热井</span></li>
-				<li><img src="img/lanhotwell-gray.png" /><span>不达标地热井</span></li>
-				<li><img src="img/build-drill.png" /><span>施工中热矿水钻孔</span></li>
-				<li><img src="img/hotspring.png" /><span>温泉</span></li>
-				<li><img src="img/hotspring-gray.png" /><span>温泉图例-灰</span></li>
-				<!--				 <li><img src="img/notuse-drill.png"/> <span>已废弃地热水钻孔</span></li> -->
-				<li><img src="img/default.png" /><span>未分类</span></li>
+				<li><img src="img/build.png" /><span>地热井-达标</span></li>
+				<li><img src="img/build-gray.png" /><span>地热井-不达标</span></li>
+				<li><img src="img/build-drill.png" /><span>地热井-施工</span></li>
+				<li><img src="img/build-discard.png" /><span>地热井-废弃</span></li>
+				<li><img src="img/build-nodata.png" /><span>地热井-无资料</span></li>
+				<li><img src="img/hotspring.png" /><span>温泉-达标</span></li>
+				<li><img src="img/hotspring-gray.png" /><span>温泉-不达标</span></li>
+				<li><img src="img/hotspring-black.png" /><span>温泉-废弃</span></li>
+				<li><img src="img/hotspring-yelllow.png" /><span>温泉-无资料</span></li>
+				<li><img src="img/anatomy.png" /><span>理疗功效研究点</span></li>
+				<li><img src="img/effect.png" /><span>成因解剖研究点</span></li>
 			</ul>
 
 		</div>
-
+		<!-- 地图数据筛选模块 -->
+		<div id="showscreen" title="显示筛选"><img src="img/show.svg" /></div>
 		<div id="screen" class="layui-form layui-form-item">
+			<!-- 地图图层筛选 -->
 			<ul class="layers">
-				<!-- <li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="layersall" name="layersall" title="全部图层" checked="true"/></li> -->
 				<li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="mapstructure" name="mapstructure"
 					 title="图框" checked="true" /></li>
 				<li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="mapname" name="mapname"
@@ -76,60 +84,49 @@
 					 checked="true" /></li>
 				<li><input type="checkbox" lay-skin="primary" disabled="disabled" lay-filter="layers" id="country" name="country"
 					 title="县界" checked="true" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="structure" name="structure" title="构造图层" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="traffic" name="traffic" title="交通图层" checked="true" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="structure" name="structure" title="构造图层" />
+				</li>
 				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="structure1" name="structure1" title="褶皱图层" /></li>
 				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="fault" name="fault" title="断层图层" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="residential" name="residential" title="乡镇图层" /></li>
 				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="rivers" name="rivers" title="河流图层" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="layers" id="traffic" name="traffic" title="交通图层" checked="true" /></li>
 			</ul>
+			<!-- 温泉水质指标筛选 -->
 			<ul class="water-quality">
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="waterqualityall" name="waterqualityall"
-					 title="全部" checked="" /></li>
 				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="waterTemperature" name="waterTemperature"
-					 title="水温" checked="" /></li>
+					 title="温度" /></li>
 				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="dissolvedSolids" name="dissolvedSolids"
-					 title="溶解性总固体" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="co2" name="co2" title="二氧化碳" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="hydrothion" name="hydrothion" title="总硫化氢"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="hsio" name="hsio" title="偏硅酸" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="hbo2" name="hbo2" title="偏硼酸" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="br2" name="br2" title="溴" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="i2" name="i2" title="碘" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="fe" name="fe" title="总铁" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="asa" name="asa" title="砷" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="rn" name="rn" title="氡" checked="" /></li>
+					 title="溶解性总固体" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="co2" name="co2" title="二氧化碳" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="hydrothion" name="hydrothion" title="总硫化氢" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="hsio" name="hsio" title="偏硅酸" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="hbo2" name="hbo2" title="偏硼酸" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="br2" name="br2" title="溴" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="i2" name="i2" title="碘" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="fe" name="fe" title="总铁" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="asa" name="asa" title="砷" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="waterquality" id="rn" name="rn" title="氡" />
+				</li>
 			</ul>
+			<!-- 热储单元类型筛选 -->
 			<ul class="heat-store">
-				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstoreall" name="heatstoreall" title="全部"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstoreone" name="heatstoreone" title="第一热储单元"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstoretwo" name="heatstoretwo" title="第二热储单元"
-					 checked="" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstoreone" name="heatstoreone" title="第一热储单元" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstoretwo" name="heatstoretwo" title="第二热储单元" /></li>
 				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstorethree" name="heatstorethree"
-					 title="第三热储单元" checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstorefour" name="heatstorefour" title="第四热储单元"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstorefive" name="heatstorefive" title="第五热储单元"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstoresix" name="heatstoresix" title="赤水、习水地区热卤水型"
-					 checked="" /></li>
+					 title="第三热储单元" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstorefour" name="heatstorefour" title="第四热储单元" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstorefive" name="heatstorefive" title="第五热储单元" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstoresix" name="heatstoresix" title="赤水、习水地区热卤水型" /></li>
 				<li><input type="checkbox" lay-skin="primary" lay-filter="heatstore" id="heatstoreseven" name="heatstoreseven"
-					 title="变质岩区构造裂隙型" checked="" /></li>
+					 title="变质岩区构造裂隙型" /></li>
 			</ul>
+			<!-- 其他温泉指标筛选 -->
 			<ul class="hot-other">
-				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hototherone" name="hototherone" title="温泉地区流行病学调查"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hotothertwo" name="hotothertwo" title="温泉理疗功效干预实验"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hototherthree" name="hototherthree" title="理疗温泉成因解剖"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hototherfour" name="hototherfour" title="温泉"
-					 checked="" /></li>
-				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hototherfive" name="hototherfive" title="地热井"
-					 checked="" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hototherone" name="hototherone" title="温泉地区流行病学调查" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hotothertwo" name="hotothertwo" title="温泉理疗功效干预实验" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hototherthree" name="hototherthree" title="理疗温泉成因解剖" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hototherfour" name="hototherfour" title="温泉" /></li>
+				<li><input type="checkbox" lay-skin="primary" lay-filter="hotother" id="hototherfive" name="hototherfive" title="地热井" /></li>
 			</ul>
 		</div>
 
@@ -137,8 +134,9 @@
 		<script type="text/javascript" src="Api.js"></script>
 		<script type="text/javascript" src="layui/layui.js"></script>
 		<script type="text/javascript" src="leaflet/leaflet.js"></script>
-		<script src="js/proj4-compressed.js"></script>
-		<script src="js/proj4leaflet.js"></script>
+		<script type="text/javascript" src="js/proj4-compressed.js"></script>
+		<script type="text/javascript" src="js/proj4leaflet.js"></script>
+		<script type="text/javascript" src="js/html2canvas.js"></script>
 		<script type="text/javascript" src="js/catiline.js"></script>
 		<script type="text/javascript" src="bundle.js"></script>
 		<script type="text/javascript" src="index.js"></script>
