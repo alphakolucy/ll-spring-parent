@@ -43,6 +43,9 @@ public class AuthController implements AuthControllerApi {
         if (loginRequest == null || StringUtils.isEmpty(loginRequest.getPassword())) {
             ExceptionCast.cast(AuthCode.AUTH_PASSWORD_NONE);
         }
+
+
+
 //        //账号
 //        String username = loginRequest.getUsername();
 //        //密码

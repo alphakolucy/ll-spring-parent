@@ -201,26 +201,19 @@
 									message: data.msg
 								}, function() {
 									layer.close(loadindex);
-									window.location = "159753852.html";
+									window.location = "show.html";
 								});
 							} else if (data.code == 301) {
-								layer.msg("错误301,"+data.message, {
+								layer.msg("用户名或密码错误", {
 									icon: 5,
 									time: 2000,
-									message: data.message
+									message: data.msg
 								}, function() {
 									layer.close(loadindex);
 								});
-							}else if (data.code == 302) {
-								layer.msg("错误302,"+data.message, {
-									icon: 5,
-									time: 2000,
-									message: data.message
-								}, function() {
-									layer.close(loadindex);
-								});
+							}
 							return false;
-						}},
+						},
 						error: function(data) {
 							layer.msg("网络错误！", {
 								icon: 5,

@@ -138,7 +138,7 @@ public class SpringPointInfo implements Serializable {
     @Column(nullable = false, length = 20)
     private Double rn;
     //水化学类型
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 255)
     private String hydrochemicalType;
 
     //热储单元

@@ -15,6 +15,8 @@ public enum AuthCode implements ResultCode {
     //认证代码
     AUTH_USERNAME_NONE(false,23001,"请输入账号！"),
     AUTH_PASSWORD_NONE(false,23002,"请输入密码！"),
+    AUTH_USERNAME_ERROR(false,301,"没有该账号！"),
+    AUTH_PASSWORD_ERROR(false,302,"密码错误！"),
     AUTH_VERIFYCODE_NONE(false,23003,"请输入验证码！"),
     AUTH_ACCOUNT_NOTEXISTS(false,23004,"账号不存在！"),
     AUTH_CREDENTIAL_ERROR(false,23005,"账号或密码错误！"),

@@ -1,0 +1,65 @@
+前端结构：
+html 数据管理界面
+	pointlist.html
+        温泉点列表页面，包含js脚本
+	pointlistanatomy.html
+		理疗温泉点成因解剖列表页面，包含js脚本
+	pointlisteffect.html
+		理疗温泉点成因功效列表页面，包含js脚本
+    pointadd.html
+        温泉点添加页面，包含js脚本
+    pointdetail.html
+        温泉点查看页面，包含js脚本
+    pointmodify.html
+        温泉点编辑页面，包含js脚本
+showhtml 数据展示界面
+    pointdetail.html
+        温泉点查看页面，包含js脚本
+    pointlist.html
+        温泉点列表页面，包含js脚本
+	pointlistanatomy.html
+		理疗温泉点成因解剖列表页面，包含js脚本
+	pointlisteffect.html
+		理疗温泉点成因功效列表页面，包含js脚本
+		
+img
+    图片素材
+
+js
+    js脚本
+
+jsondata
+    底图构建数据
+
+layui
+    js前端框架，包含素材样式和js脚本文件  https://www.layui.com/
+
+leaflet
+    开源地图js库，包含素材样式和js脚本文件 https://leafletjs.com/reference-1.6.0.html
+
+layui_extends
+    layui下拉多选插件 https://fly.layui.com/extend/selectN,selectM/#doc
+	
+Api.js
+    公用js
+
+index.html 
+    数据管理主页面
+
+index.css
+    主页面样式
+
+index.js
+    数据管理主页面js
+	
+showlogin.html
+	 数据管理登录界面
+	 
+show.html 
+	数据展示主界面
+
+show.js
+    数据展示主页面js
+
+showlogin.html
+    数据展示登录界面
