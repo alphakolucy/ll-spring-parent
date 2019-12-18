@@ -576,126 +576,142 @@ layui.use(['layer', 'jquery', 'form'], function() {
 			})
 		}
 	});
-
+	
+	var ishotlist=[30001,30005,-1];
 	//温泉点其他筛选条件操作函数
 	form.on('checkbox(hotother)', function(data) {
 		var layername = $(data.elem).attr('name');
 		var layertitle = $(data.elem).attr('title');
 		var layercheck = data.elem.checked;
 		switch (layername) {
-			case "hototherone":
+			case "hototherone"://符合理疗指标温泉
 				{
-					if (layercheck) { //显示温泉地区流行病学调查录入数据为是的温泉点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["epidemiologicalSurvey"] == "是") {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
-							}
-						});
-					} else { //显示温泉地区流行病学调查录入数据为否的温泉点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["epidemiologicalSurvey"] == "否" || properties["epidemiologicalSurvey"] == "") {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
-							}
-						});
+					if (layercheck) {
+						ishotlist.push(30001);
+					} else {
+						var index=$.inArray(30001, ishotlist);
+						ishotlist.splice(index,1);
 					}
+					hotspringslayer.eachLayer(function(layer) {
+						var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
+						switch(properties["pointCategory"]) {
+							case 30001:{
+								var index=$.inArray(30001, ishotlist);
+								console.log("index="+index);
+								if(index>-1){
+									console.log("30001addLayer");
+									map.addLayer(layer);
+								}else{
+									console.log("30001removeLayer");
+									console.log("30001name="+properties["codeNumber"]);
+									map.removeLayer(layer);
+								}
+								break;
+							}
+							case 30005:{
+								var index=$.inArray(30005, ishotlist);
+								if(index>-1){
+									map.addLayer(layer);
+								}else{
+									map.removeLayer(layer);
+								}
+								break;
+							}
+							default:{
+								var index=$.inArray(-1, ishotlist);
+								if(index>-1){
+									map.addLayer(layer);
+								}else{
+									map.removeLayer(layer);
+								}
+								break;
+							}
+						}
+					});
 					break;
 				}
-			case "hotothertwo":
+			case "hotothertwo"://地热井
 				{
-					if (layercheck) { //显示温泉理疗功效干预实验录入数据为是的温泉点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["efficacyInterventionExperiment"] == "是") {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
-							}
-						});
-					} else { //显示温泉理疗功效干预实验录入数据为否的温泉点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["efficacyInterventionExperiment"] == "否" || properties["efficacyInterventionExperiment"] == "") {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
-							}
-						});
+					if (layercheck) {
+						ishotlist.push(30005);
+					} else {
+						var index=$.inArray(30005, ishotlist);
+						ishotlist.splice(index,1);
 					}
+					hotspringslayer.eachLayer(function(layer) {
+						var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
+						switch(properties["pointCategory"]) {
+							case 30001:{
+								var index=$.inArray(30001, ishotlist);
+								if(index>-1){
+									map.addLayer(layer);
+								}else{
+									map.removeLayer(layer);
+								}
+								break;
+							}
+							case 30005:{
+								var index=$.inArray(30005, ishotlist);
+								if(index>-1){
+									map.addLayer(layer);
+								}else{
+									map.removeLayer(layer);
+								}
+								break;
+							}
+							default:{
+								var index=$.inArray(-1, ishotlist);
+								if(index>-1){
+									map.addLayer(layer);
+								}else{
+									map.removeLayer(layer);
+								}
+								break;
+							}
+						}
+					});
 					break;
 				}
-			case "hototherthree":
+			case "hototherthree"://其他点位
 				{
-					if (layercheck) { //显示理疗温泉成因解剖录入数据为是的温泉点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["geneticDissection"] == "是") {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
-							}
-						});
-					} else { //显示理疗温泉成因解剖录入数据为否的温泉点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["geneticDissection"] == "否" || properties["geneticDissection"] == "") {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
-							}
-						});
+					if (layercheck) {
+						ishotlist.push(-1);
+					} else {
+						var index=$.inArray(-1, ishotlist);
+						ishotlist.splice(index,1);
 					}
-					break;
-				}
-			case "hototherfour":
-				{
-					if (layercheck) { //显示温泉类型为温泉的点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["codeNumber"].indexOf("S") == 0 || properties["codeNumber"].indexOf("s") == 0) {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
+					hotspringslayer.eachLayer(function(layer) {
+						var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
+						switch(properties["pointCategory"]) {
+							case 30001:{
+								var index=$.inArray(30001, ishotlist);
+								if(index>-1){
+									map.addLayer(layer);
+								}else{
+									map.removeLayer(layer);
+								}
+								break;
 							}
-						});
-					} else { //显示温泉类型不为温泉的点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["codeNumber"].indexOf("S") != 0 || properties["codeNumber"].indexOf("s") != 0) {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
+							case 30005:{
+								var index=$.inArray(30005, ishotlist);
+								if(index>-1){
+									map.addLayer(layer);
+								}else{
+									map.removeLayer(layer);
+								}
+								break;
 							}
-						});
-					}
-					break;
-				}
-			case "hototherfive":
-				{
-					if (layercheck) { //显示温泉类型为地热井的点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["codeNumber"].indexOf("DR") == 0 || properties["codeNumber"].indexOf("dr") == 0) {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
+							default:{
+								var index=$.inArray(-1, ishotlist);
+								if(index>-1){
+									map.addLayer(layer);
+								}else{
+									map.removeLayer(layer);
+								}
+								break;
 							}
-						});
-					} else { //显示温泉类型不为地热井的点
-						hotspringslayer.eachLayer(function(layer) {
-							var properties = layer._layers[layer._leaflet_id - 1].feature.properties;
-							if (properties["codeNumber"].indexOf("DR") != 0 || properties["codeNumber"].indexOf("dr") == 0) {
-								map.addLayer(layer);
-							}else{
-								map.removeLayer(layer);
-							}
-						});
-					}
+						}
+					});
 					break;
 				}
 			default:

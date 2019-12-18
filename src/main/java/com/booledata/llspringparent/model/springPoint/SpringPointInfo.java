@@ -10,6 +10,7 @@ import org.hibernate.annotations.*;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -145,6 +146,9 @@ public class SpringPointInfo implements Serializable {
     @Column(nullable = false,length = 255)
     private String reservoirUnit;
 
+    //理疗类型
+    @Column(length = 255)
+    private String llType;
 
     /**
      * ----四种状态----

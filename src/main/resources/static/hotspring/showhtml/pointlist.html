@@ -203,37 +203,9 @@
 								title: '出水段'
 							},
 							{
-								field: 'pointCategory',
+								field: 'llType',
 								title: '理疗类型',
-								templet: function(d) {
-									if (d.pointCategory == 30001) {
-										return "天然温泉";
-									}else if (d.pointCategory == -30002) {
-										return "不达标温泉";
-									} else if (d.pointCategory == -30003) {
-										return "无资料温泉";
-									}else if (d.pointCategory == -30004) {
-										return "废弃温泉";
-									}else if (d.pointCategory == 30005) {
-										return "地热井";
-									}else if (d.pointCategory == 30006) {
-										return "施工中地热井";
-									}else if (d.pointCategory == -30007) {
-										return "不达标地热井";
-									}else if (d.pointCategory == -30008) {
-										return "废弃地热井";
-									}else if (d.pointCategory == -30009) {
-										return "无资料地热井";
-									}else if (d.pointCategory == 30010) {
-										return "理疗功效研究点";
-									}else if (d.pointCategory == 30011) {
-										return "成因解剖研究点";
-									}else if (d.pointCategory == 30012) {
-										return "理疗功效成因解剖研究点";
-									}else if (d.pointCategory == -30012) {
-										return "录入编号异常";
-									}
-								}
+
 							},
 							{
 								title: '操作',

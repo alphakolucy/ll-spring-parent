@@ -31,6 +31,16 @@ public class PointCategoryUtil {
 		if (codeNumber.contains("S") || codeNumber.contains("s")) {
 
 			if (b) {
+				if ("是".equals(epidemiologicalSurvey) || "是".equals(efficacyInterventionExperiment)) {
+					springPointInfo.setLlStatus(PointCategory.LLGXYJD.getValue());
+					if ("是".equals(geneticDissection)) {
+						springPointInfo.setLlStatus(PointCategory.BOTHLLCY.getValue());
+						return springPointInfo;
+					}
+				}else if ("是".equals(geneticDissection)) {
+					springPointInfo.setLlStatus(PointCategory.SGZRKSZK.getValue());
+					return springPointInfo;
+				}
 				springPointInfo.setPointCategory(PointCategory.S.getValue());
 				return springPointInfo;
 			} else if (statu.equals(status[0])) {
@@ -59,6 +69,16 @@ public class PointCategoryUtil {
 			//判断是否是施工中地热井
 			boolean reach = getReach(springPointInfo);
 			if (b) {
+				if ("是".equals(epidemiologicalSurvey) || "是".equals(efficacyInterventionExperiment)) {
+					springPointInfo.setLlStatus(PointCategory.LLGXYJD.getValue());
+					if ("是".equals(geneticDissection)) {
+						springPointInfo.setLlStatus(PointCategory.BOTHLLCY.getValue());
+						return springPointInfo;
+					}
+				}else if ("是".equals(geneticDissection)) {
+					springPointInfo.setLlStatus(PointCategory.SGZRKSZK.getValue());
+					return springPointInfo;
+				}
 				springPointInfo.setPointCategory(PointCategory.DR.getValue());
 				return springPointInfo;
 			} else if (statu.equals(status[0])) {
@@ -132,6 +152,10 @@ public class PointCategoryUtil {
 		//温度大于等于36°进行判断  否则为不达标
 		if (waterTemperature1 >= waterTemperature && statu.equals(pointStatus)) {
 			boolean b = springTypeService.saveType(springPointInfo);
+			//温度达标亦为达标温泉点
+			if (springPointInfo.getWaterTemperature()>=36){
+				b =true;
+			}
 			return selectPointCategory(springPointInfo, b);
 		} else if (status[0].equals(pointStatus) || status[2].equals(pointStatus)) {
 //            Integer  pointCategory=PointCategory.WZL.getTxt().equals(pointStatus)? PointCategory.WZL.getValue():PointCategory.FQ.getValue();
